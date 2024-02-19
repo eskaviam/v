@@ -8,10 +8,10 @@ from socketio import ASGIApp, AsyncServer
 
 from invokeai.app.services.events.events_common import (
     BatchEnqueuedEvent,
-    BulkImageDownloadCompleteEvent,
-    BulkImageDownloadErrorEvent,
-    BulkImageDownloadEvent,
-    BulkImageDownloadStartedEvent,
+    BulkDownloadCompleteEvent,
+    BulkDownloadErrorEvent,
+    BulkDownloadEvent,
+    BulkDownloadStartedEvent,
     FastAPIEvent,
     InvocationCompleteEvent,
     InvocationDenoiseProgressEvent,
@@ -90,7 +90,7 @@ class SocketIO:
         )
 
         register_events(
-            [BulkImageDownloadStartedEvent, BulkImageDownloadCompleteEvent, BulkImageDownloadErrorEvent],
+            [BulkDownloadStartedEvent, BulkDownloadCompleteEvent, BulkDownloadErrorEvent],
             self._handle_bulk_image_download_event,
         )
 
@@ -114,6 +114,6 @@ class SocketIO:
         event_name, payload = event
         await self._sio.emit(event=event_name, data=payload.model_dump())
 
-    async def _handle_bulk_image_download_event(self, event: FastAPIEvent[BulkImageDownloadEvent]) -> None:
+    async def _handle_bulk_image_download_event(self, event: FastAPIEvent[BulkDownloadEvent]) -> None:
         event_name, payload = event
         await self._sio.emit(event=event_name, data=payload.model_dump())

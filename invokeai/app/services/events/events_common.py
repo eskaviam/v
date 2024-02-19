@@ -533,7 +533,7 @@ class ModelInstallErrorEvent(ModelEvent):
         return cls(source=source, error_type=error_type, error=error)
 
 
-class BulkImageDownloadEvent(AppEvent, ABC):
+class BulkDownloadEvent(AppEvent, ABC):
     """Base class for events associated with a bulk image download"""
 
     __event_type__ = EventType.BULK_IMAGE_DOWNLOAD
@@ -544,15 +544,16 @@ class BulkImageDownloadEvent(AppEvent, ABC):
     bulk_download_item_name: str = Field(description="The name of the bulk image download item")
 
 
-class BulkImageDownloadStartedEvent(BulkImageDownloadEvent):
+@payload_schema.register  # pyright: ignore [reportUnknownMemberType]
+class BulkDownloadStartedEvent(BulkDownloadEvent):
     """Emitted when a bulk image download is started"""
 
-    __event_name__ = "bulk_image_download_started"
+    __event_name__ = "bulk_download_started"
 
     @classmethod
     def build(
         cls, bulk_download_id: str, bulk_download_item_id: str, bulk_download_item_name: str
-    ) -> "BulkImageDownloadStartedEvent":
+    ) -> "BulkDownloadStartedEvent":
         return cls(
             bulk_download_id=bulk_download_id,
             bulk_download_item_id=bulk_download_item_id,
@@ -560,15 +561,16 @@ class BulkImageDownloadStartedEvent(BulkImageDownloadEvent):
         )
 
 
-class BulkImageDownloadCompleteEvent(BulkImageDownloadEvent):
+@payload_schema.register  # pyright: ignore [reportUnknownMemberType]
+class BulkDownloadCompleteEvent(BulkDownloadEvent):
     """Emitted when a bulk image download is started"""
 
-    __event_name__ = "bulk_image_download_complete"
+    __event_name__ = "bulk_download_complete"
 
     @classmethod
     def build(
         cls, bulk_download_id: str, bulk_download_item_id: str, bulk_download_item_name: str
-    ) -> "BulkImageDownloadCompleteEvent":
+    ) -> "BulkDownloadCompleteEvent":
         return cls(
             bulk_download_id=bulk_download_id,
             bulk_download_item_id=bulk_download_item_id,
@@ -576,17 +578,18 @@ class BulkImageDownloadCompleteEvent(BulkImageDownloadEvent):
         )
 
 
-class BulkImageDownloadErrorEvent(BulkImageDownloadEvent):
+@payload_schema.register  # pyright: ignore [reportUnknownMemberType]
+class BulkDownloadErrorEvent(BulkDownloadEvent):
     """Emitted when a bulk image download is started"""
 
-    __event_name__ = "bulk_image_download_error"
+    __event_name__ = "bulk_download_error"
 
     error: str = Field(description="The error message")
 
     @classmethod
     def build(
         cls, bulk_download_id: str, bulk_download_item_id: str, bulk_download_item_name: str, error: str
-    ) -> "BulkImageDownloadErrorEvent":
+    ) -> "BulkDownloadErrorEvent":
         return cls(
             bulk_download_id=bulk_download_id,
             bulk_download_item_id=bulk_download_item_id,

@@ -10,6 +10,11 @@ from invokeai.app.services.bulk_download.bulk_download_common import (
     BulkDownloadParametersException,
     BulkDownloadTargetException,
 )
+from invokeai.app.services.events.events_common import (
+    BulkDownloadCompleteEvent,
+    BulkDownloadErrorEvent,
+    BulkDownloadStartedEvent,
+)
 from invokeai.app.services.image_records.image_records_common import ImageRecordNotFoundException
 from invokeai.app.services.images.images_common import ImageDTO
 from invokeai.app.services.invoker import Invoker
@@ -105,10 +110,12 @@ class BulkDownloadService(BulkDownloadBase):
         """Signal that a bulk download job has started."""
         if self._invoker:
             assert bulk_download_id is not None
-            self._invoker.services.events.emit_bulk_download_started(
-                bulk_download_id=bulk_download_id,
-                bulk_download_item_id=bulk_download_item_id,
-                bulk_download_item_name=bulk_download_item_name,
+            self._invoker.services.events.dispatch(
+                BulkDownloadStartedEvent.build(
+                    bulk_download_id=bulk_download_id,
+                    bulk_download_item_id=bulk_download_item_id,
+                    bulk_download_item_name=bulk_download_item_name,
+                )
             )
 
     def _signal_job_completed(
@@ -118,10 +125,12 @@ class BulkDownloadService(BulkDownloadBase):
         if self._invoker:
             assert bulk_download_id is not None
             assert bulk_download_item_name is not None
-            self._invoker.services.events.emit_bulk_download_completed(
-                bulk_download_id=bulk_download_id,
-                bulk_download_item_id=bulk_download_item_id,
-                bulk_download_item_name=bulk_download_item_name,
+            self._invoker.services.events.dispatch(
+                BulkDownloadCompleteEvent.build(
+                    bulk_download_id=bulk_download_id,
+                    bulk_download_item_id=bulk_download_item_id,
+                    bulk_download_item_name=bulk_download_item_name,
+                )
             )
 
     def _signal_job_failed(
@@ -131,11 +140,13 @@ class BulkDownloadService(BulkDownloadBase):
         if self._invoker:
             assert bulk_download_id is not None
             assert exception is not None
-            self._invoker.services.events.emit_bulk_download_failed(
-                bulk_download_id=bulk_download_id,
-                bulk_download_item_id=bulk_download_item_id,
-                bulk_download_item_name=bulk_download_item_name,
-                error=str(exception),
+            self._invoker.services.events.dispatch(
+                BulkDownloadErrorEvent.build(
+                    bulk_download_id=bulk_download_id,
+                    bulk_download_item_id=bulk_download_item_id,
+                    bulk_download_item_name=bulk_download_item_name,
+                    error=str(exception),
+                )
             )
 
     def stop(self, *args, **kwargs):

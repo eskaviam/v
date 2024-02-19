@@ -34,7 +34,6 @@ class FastAPIEventService(EventServiceBase):
                 event = self._queue.get(block=False)
                 if not event:  # Probably stopping
                     continue
-                print(event)
                 dispatch(event, middleware_id=self.event_handler_id, payload_schema_dump=False)
 
             except Empty:
