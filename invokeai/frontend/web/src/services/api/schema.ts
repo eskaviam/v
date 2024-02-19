@@ -1362,6 +1362,7 @@ export type components = {
       /**
        * Description
        * @description Model description
+       * @default null
        */
       description?: string | null;
       /**
@@ -1374,11 +1375,13 @@ export type components = {
       /**
        * Source Api Response
        * @description The original API response from the source, as stringified JSON.
+       * @default null
        */
       source_api_response?: string | null;
       /**
        * Cover Image
        * @description Url for image to preview model
+       * @default null
        */
       cover_image?: string | null;
       /**
@@ -2287,7 +2290,10 @@ export type components = {
      * @description Model config for ControlNet models (diffusers version).
      */
     ControlNetCheckpointConfig: {
-      /** @description Default settings for this model */
+      /**
+       * @description Default settings for this model
+       * @default null
+       */
       default_settings?: components["schemas"]["ControlAdapterDefaultSettings"] | null;
       /**
        * Key
@@ -2314,6 +2320,7 @@ export type components = {
       /**
        * Description
        * @description Model description
+       * @default null
        */
       description?: string | null;
       /**
@@ -2326,11 +2333,13 @@ export type components = {
       /**
        * Source Api Response
        * @description The original API response from the source, as stringified JSON.
+       * @default null
        */
       source_api_response?: string | null;
       /**
        * Cover Image
        * @description Url for image to preview model
+       * @default null
        */
       cover_image?: string | null;
       /**
@@ -2361,7 +2370,10 @@ export type components = {
      * @description Model config for ControlNet models (diffusers version).
      */
     ControlNetDiffusersConfig: {
-      /** @description Default settings for this model */
+      /**
+       * @description Default settings for this model
+       * @default null
+       */
       default_settings?: components["schemas"]["ControlAdapterDefaultSettings"] | null;
       /**
        * Key
@@ -2388,6 +2400,7 @@ export type components = {
       /**
        * Description
        * @description Model description
+       * @default null
        */
       description?: string | null;
       /**
@@ -2400,11 +2413,13 @@ export type components = {
       /**
        * Source Api Response
        * @description The original API response from the source, as stringified JSON.
+       * @default null
        */
       source_api_response?: string | null;
       /**
        * Cover Image
        * @description Url for image to preview model
+       * @default null
        */
       cover_image?: string | null;
       /**
@@ -4103,7 +4118,7 @@ export type components = {
        * @description The nodes in this graph
        */
       nodes: {
-        [key: string]: components["schemas"]["BlendLatentsInvocation"] | components["schemas"]["StepParamEasingInvocation"] | components["schemas"]["SDXLRefinerModelLoaderInvocation"] | components["schemas"]["RoundInvocation"] | components["schemas"]["SeamlessModeInvocation"] | components["schemas"]["SDXLModelLoaderInvocation"] | components["schemas"]["ImageMultiplyInvocation"] | components["schemas"]["ImageWatermarkInvocation"] | components["schemas"]["SDXLCompelPromptInvocation"] | components["schemas"]["CollectInvocation"] | components["schemas"]["StringSplitInvocation"] | components["schemas"]["ColorInvocation"] | components["schemas"]["ImageChannelInvocation"] | components["schemas"]["CLIPSkipInvocation"] | components["schemas"]["IPAdapterInvocation"] | components["schemas"]["UnsharpMaskInvocation"] | components["schemas"]["ImagePasteInvocation"] | components["schemas"]["AddInvocation"] | components["schemas"]["LatentsToImageInvocation"] | components["schemas"]["LeresImageProcessorInvocation"] | components["schemas"]["InfillTileInvocation"] | components["schemas"]["CenterPadCropInvocation"] | components["schemas"]["MaskCombineInvocation"] | components["schemas"]["InfillColorInvocation"] | components["schemas"]["CalculateImageTilesInvocation"] | components["schemas"]["SegmentAnythingProcessorInvocation"] | components["schemas"]["StringCollectionInvocation"] | components["schemas"]["IterateInvocation"] | components["schemas"]["MidasDepthImageProcessorInvocation"] | components["schemas"]["ShowImageInvocation"] | components["schemas"]["LatentsCollectionInvocation"] | components["schemas"]["ImageChannelMultiplyInvocation"] | components["schemas"]["StringSplitNegInvocation"] | components["schemas"]["ImageNSFWBlurInvocation"] | components["schemas"]["FreeUInvocation"] | components["schemas"]["MlsdImageProcessorInvocation"] | components["schemas"]["RangeInvocation"] | components["schemas"]["BlankImageInvocation"] | components["schemas"]["VAELoaderInvocation"] | components["schemas"]["FaceMaskInvocation"] | components["schemas"]["LoRALoaderInvocation"] | components["schemas"]["CropLatentsCoreInvocation"] | components["schemas"]["ControlNetInvocation"] | components["schemas"]["NoiseInvocation"] | components["schemas"]["CanvasPasteBackInvocation"] | components["schemas"]["MainModelLoaderInvocation"] | components["schemas"]["StringReplaceInvocation"] | components["schemas"]["SchedulerInvocation"] | components["schemas"]["SDXLRefinerCompelPromptInvocation"] | components["schemas"]["NormalbaeImageProcessorInvocation"] | components["schemas"]["DenoiseLatentsInvocation"] | components["schemas"]["CalculateImageTilesMinimumOverlapInvocation"] | components["schemas"]["IntegerInvocation"] | components["schemas"]["ImageBlurInvocation"] | components["schemas"]["CV2InfillInvocation"] | components["schemas"]["ImageChannelOffsetInvocation"] | components["schemas"]["IdealSizeInvocation"] | components["schemas"]["DepthAnythingImageProcessorInvocation"] | components["schemas"]["DynamicPromptInvocation"] | components["schemas"]["ImageConvertInvocation"] | components["schemas"]["T2IAdapterInvocation"] | components["schemas"]["LineartImageProcessorInvocation"] | components["schemas"]["ResizeLatentsInvocation"] | components["schemas"]["ContentShuffleImageProcessorInvocation"] | components["schemas"]["LatentsInvocation"] | components["schemas"]["CannyImageProcessorInvocation"] | components["schemas"]["BooleanInvocation"] | components["schemas"]["MaskEdgeInvocation"] | components["schemas"]["IntegerMathInvocation"] | components["schemas"]["SaveImageInvocation"] | components["schemas"]["ImageCollectionInvocation"] | components["schemas"]["RangeOfSizeInvocation"] | components["schemas"]["ConditioningCollectionInvocation"] | components["schemas"]["ESRGANInvocation"] | components["schemas"]["CoreMetadataInvocation"] | components["schemas"]["ImageCropInvocation"] | components["schemas"]["MaskFromAlphaInvocation"] | components["schemas"]["FloatLinearRangeInvocation"] | components["schemas"]["ImageLerpInvocation"] | components["schemas"]["CompelInvocation"] | components["schemas"]["FloatCollectionInvocation"] | components["schemas"]["ImageInverseLerpInvocation"] | components["schemas"]["IntegerCollectionInvocation"] | components["schemas"]["CreateGradientMaskInvocation"] | components["schemas"]["ColorMapImageProcessorInvocation"] | components["schemas"]["PromptsFromFileInvocation"] | components["schemas"]["RandomRangeInvocation"] | components["schemas"]["ImageToLatentsInvocation"] | components["schemas"]["SDXLLoRALoaderInvocation"] | components["schemas"]["StringInvocation"] | components["schemas"]["CalculateImageTilesEvenSplitInvocation"] | components["schemas"]["ColorCorrectInvocation"] | components["schemas"]["FloatMathInvocation"] | components["schemas"]["ZoeDepthImageProcessorInvocation"] | components["schemas"]["DivideInvocation"] | components["schemas"]["FaceOffInvocation"] | components["schemas"]["ImageResizeInvocation"] | components["schemas"]["PairTileImageInvocation"] | components["schemas"]["FaceIdentifierInvocation"] | components["schemas"]["InfillPatchMatchInvocation"] | components["schemas"]["ScaleLatentsInvocation"] | components["schemas"]["MergeMetadataInvocation"] | components["schemas"]["ConditioningInvocation"] | components["schemas"]["SubtractInvocation"] | components["schemas"]["LineartAnimeImageProcessorInvocation"] | components["schemas"]["ImageScaleInvocation"] | components["schemas"]["LaMaInfillInvocation"] | components["schemas"]["ImageHueAdjustmentInvocation"] | components["schemas"]["CvInpaintInvocation"] | components["schemas"]["StringJoinInvocation"] | components["schemas"]["RandomIntInvocation"] | components["schemas"]["StringJoinThreeInvocation"] | components["schemas"]["HedImageProcessorInvocation"] | components["schemas"]["BooleanCollectionInvocation"] | components["schemas"]["MetadataItemInvocation"] | components["schemas"]["MultiplyInvocation"] | components["schemas"]["MetadataInvocation"] | components["schemas"]["MediapipeFaceProcessorInvocation"] | components["schemas"]["CreateDenoiseMaskInvocation"] | components["schemas"]["TileToPropertiesInvocation"] | components["schemas"]["FloatInvocation"] | components["schemas"]["DWOpenposeImageProcessorInvocation"] | components["schemas"]["ImageInvocation"] | components["schemas"]["RandomFloatInvocation"] | components["schemas"]["MergeTilesToImageInvocation"] | components["schemas"]["FloatToIntegerInvocation"] | components["schemas"]["TileResamplerProcessorInvocation"] | components["schemas"]["PidiImageProcessorInvocation"];
+        [key: string]: components["schemas"]["ColorMapImageProcessorInvocation"] | components["schemas"]["ColorCorrectInvocation"] | components["schemas"]["MaskCombineInvocation"] | components["schemas"]["AddInvocation"] | components["schemas"]["StepParamEasingInvocation"] | components["schemas"]["FloatLinearRangeInvocation"] | components["schemas"]["T2IAdapterInvocation"] | components["schemas"]["MainModelLoaderInvocation"] | components["schemas"]["RandomIntInvocation"] | components["schemas"]["ImageChannelOffsetInvocation"] | components["schemas"]["MaskEdgeInvocation"] | components["schemas"]["IntegerCollectionInvocation"] | components["schemas"]["CalculateImageTilesMinimumOverlapInvocation"] | components["schemas"]["ImageChannelInvocation"] | components["schemas"]["StringSplitNegInvocation"] | components["schemas"]["InfillColorInvocation"] | components["schemas"]["ESRGANInvocation"] | components["schemas"]["ImageCollectionInvocation"] | components["schemas"]["CannyImageProcessorInvocation"] | components["schemas"]["RoundInvocation"] | components["schemas"]["CompelInvocation"] | components["schemas"]["StringCollectionInvocation"] | components["schemas"]["ZoeDepthImageProcessorInvocation"] | components["schemas"]["ConditioningInvocation"] | components["schemas"]["PidiImageProcessorInvocation"] | components["schemas"]["LineartAnimeImageProcessorInvocation"] | components["schemas"]["CV2InfillInvocation"] | components["schemas"]["CreateDenoiseMaskInvocation"] | components["schemas"]["FloatCollectionInvocation"] | components["schemas"]["ImagePasteInvocation"] | components["schemas"]["CoreMetadataInvocation"] | components["schemas"]["StringReplaceInvocation"] | components["schemas"]["LoRALoaderInvocation"] | components["schemas"]["ResizeLatentsInvocation"] | components["schemas"]["CropLatentsCoreInvocation"] | components["schemas"]["SegmentAnythingProcessorInvocation"] | components["schemas"]["TileResamplerProcessorInvocation"] | components["schemas"]["CalculateImageTilesInvocation"] | components["schemas"]["ImageCropInvocation"] | components["schemas"]["SchedulerInvocation"] | components["schemas"]["RandomFloatInvocation"] | components["schemas"]["MergeMetadataInvocation"] | components["schemas"]["DenoiseLatentsInvocation"] | components["schemas"]["ImageScaleInvocation"] | components["schemas"]["IdealSizeInvocation"] | components["schemas"]["ImageMultiplyInvocation"] | components["schemas"]["MlsdImageProcessorInvocation"] | components["schemas"]["CenterPadCropInvocation"] | components["schemas"]["ImageResizeInvocation"] | components["schemas"]["FaceIdentifierInvocation"] | components["schemas"]["RangeInvocation"] | components["schemas"]["MetadataInvocation"] | components["schemas"]["SDXLRefinerCompelPromptInvocation"] | components["schemas"]["CanvasPasteBackInvocation"] | components["schemas"]["CvInpaintInvocation"] | components["schemas"]["ScaleLatentsInvocation"] | components["schemas"]["BooleanInvocation"] | components["schemas"]["StringJoinInvocation"] | components["schemas"]["UnsharpMaskInvocation"] | components["schemas"]["InfillPatchMatchInvocation"] | components["schemas"]["SDXLRefinerModelLoaderInvocation"] | components["schemas"]["CollectInvocation"] | components["schemas"]["BlendLatentsInvocation"] | components["schemas"]["FloatInvocation"] | components["schemas"]["MetadataItemInvocation"] | components["schemas"]["FaceOffInvocation"] | components["schemas"]["FreeUInvocation"] | components["schemas"]["RangeOfSizeInvocation"] | components["schemas"]["ImageInverseLerpInvocation"] | components["schemas"]["CLIPSkipInvocation"] | components["schemas"]["ConditioningCollectionInvocation"] | components["schemas"]["SaveImageInvocation"] | components["schemas"]["LaMaInfillInvocation"] | components["schemas"]["ImageInvocation"] | components["schemas"]["DynamicPromptInvocation"] | components["schemas"]["MaskFromAlphaInvocation"] | components["schemas"]["HedImageProcessorInvocation"] | components["schemas"]["PairTileImageInvocation"] | components["schemas"]["ImageHueAdjustmentInvocation"] | components["schemas"]["LineartImageProcessorInvocation"] | components["schemas"]["FloatToIntegerInvocation"] | components["schemas"]["StringInvocation"] | components["schemas"]["SDXLModelLoaderInvocation"] | components["schemas"]["IntegerInvocation"] | components["schemas"]["RandomRangeInvocation"] | components["schemas"]["VAELoaderInvocation"] | components["schemas"]["MidasDepthImageProcessorInvocation"] | components["schemas"]["IntegerMathInvocation"] | components["schemas"]["LatentsToImageInvocation"] | components["schemas"]["ImageToLatentsInvocation"] | components["schemas"]["TileToPropertiesInvocation"] | components["schemas"]["DepthAnythingImageProcessorInvocation"] | components["schemas"]["MultiplyInvocation"] | components["schemas"]["ColorInvocation"] | components["schemas"]["SDXLCompelPromptInvocation"] | components["schemas"]["IPAdapterInvocation"] | components["schemas"]["FloatMathInvocation"] | components["schemas"]["MediapipeFaceProcessorInvocation"] | components["schemas"]["ImageLerpInvocation"] | components["schemas"]["StringJoinThreeInvocation"] | components["schemas"]["SubtractInvocation"] | components["schemas"]["CalculateImageTilesEvenSplitInvocation"] | components["schemas"]["StringSplitInvocation"] | components["schemas"]["LatentsCollectionInvocation"] | components["schemas"]["BooleanCollectionInvocation"] | components["schemas"]["LatentsInvocation"] | components["schemas"]["MergeTilesToImageInvocation"] | components["schemas"]["SeamlessModeInvocation"] | components["schemas"]["PromptsFromFileInvocation"] | components["schemas"]["SDXLLoRALoaderInvocation"] | components["schemas"]["ContentShuffleImageProcessorInvocation"] | components["schemas"]["NoiseInvocation"] | components["schemas"]["NormalbaeImageProcessorInvocation"] | components["schemas"]["ImageWatermarkInvocation"] | components["schemas"]["InfillTileInvocation"] | components["schemas"]["IterateInvocation"] | components["schemas"]["ImageNSFWBlurInvocation"] | components["schemas"]["FaceMaskInvocation"] | components["schemas"]["ControlNetInvocation"] | components["schemas"]["DivideInvocation"] | components["schemas"]["CreateGradientMaskInvocation"] | components["schemas"]["ImageConvertInvocation"] | components["schemas"]["ImageChannelMultiplyInvocation"] | components["schemas"]["BlankImageInvocation"] | components["schemas"]["DWOpenposeImageProcessorInvocation"] | components["schemas"]["LeresImageProcessorInvocation"] | components["schemas"]["ImageBlurInvocation"] | components["schemas"]["ShowImageInvocation"];
       };
       /**
        * Edges
@@ -4140,7 +4155,7 @@ export type components = {
        * @description The results of node executions
        */
       results: {
-        [key: string]: components["schemas"]["SDXLRefinerModelLoaderOutput"] | components["schemas"]["LatentsOutput"] | components["schemas"]["IPAdapterOutput"] | components["schemas"]["FloatOutput"] | components["schemas"]["FaceMaskOutput"] | components["schemas"]["LoRALoaderOutput"] | components["schemas"]["CollectInvocationOutput"] | components["schemas"]["BooleanCollectionOutput"] | components["schemas"]["ColorCollectionOutput"] | components["schemas"]["ImageCollectionOutput"] | components["schemas"]["IntegerOutput"] | components["schemas"]["VAEOutput"] | components["schemas"]["CalculateImageTilesOutput"] | components["schemas"]["StringOutput"] | components["schemas"]["IdealSizeOutput"] | components["schemas"]["UNetOutput"] | components["schemas"]["CLIPOutput"] | components["schemas"]["SDXLLoRALoaderOutput"] | components["schemas"]["ModelLoaderOutput"] | components["schemas"]["BooleanOutput"] | components["schemas"]["ImageOutput"] | components["schemas"]["SeamlessModeOutput"] | components["schemas"]["T2IAdapterOutput"] | components["schemas"]["IntegerCollectionOutput"] | components["schemas"]["GradientMaskOutput"] | components["schemas"]["NoiseOutput"] | components["schemas"]["TileToPropertiesOutput"] | components["schemas"]["ConditioningCollectionOutput"] | components["schemas"]["DenoiseMaskOutput"] | components["schemas"]["CLIPSkipInvocationOutput"] | components["schemas"]["String2Output"] | components["schemas"]["ConditioningOutput"] | components["schemas"]["PairTileImageOutput"] | components["schemas"]["StringCollectionOutput"] | components["schemas"]["SDXLModelLoaderOutput"] | components["schemas"]["MetadataOutput"] | components["schemas"]["StringPosNegOutput"] | components["schemas"]["IterateInvocationOutput"] | components["schemas"]["ControlOutput"] | components["schemas"]["ColorOutput"] | components["schemas"]["FloatCollectionOutput"] | components["schemas"]["FaceOffOutput"] | components["schemas"]["LatentsCollectionOutput"] | components["schemas"]["MetadataItemOutput"] | components["schemas"]["SchedulerOutput"];
+        [key: string]: components["schemas"]["MetadataOutput"] | components["schemas"]["ModelLoaderOutput"] | components["schemas"]["ImageCollectionOutput"] | components["schemas"]["IntegerOutput"] | components["schemas"]["CollectInvocationOutput"] | components["schemas"]["IdealSizeOutput"] | components["schemas"]["SDXLRefinerModelLoaderOutput"] | components["schemas"]["StringPosNegOutput"] | components["schemas"]["ImageOutput"] | components["schemas"]["ControlOutput"] | components["schemas"]["CalculateImageTilesOutput"] | components["schemas"]["FaceMaskOutput"] | components["schemas"]["IterateInvocationOutput"] | components["schemas"]["LatentsCollectionOutput"] | components["schemas"]["UNetOutput"] | components["schemas"]["NoiseOutput"] | components["schemas"]["TileToPropertiesOutput"] | components["schemas"]["LoRALoaderOutput"] | components["schemas"]["FloatCollectionOutput"] | components["schemas"]["SeamlessModeOutput"] | components["schemas"]["SchedulerOutput"] | components["schemas"]["CLIPSkipInvocationOutput"] | components["schemas"]["ConditioningOutput"] | components["schemas"]["MetadataItemOutput"] | components["schemas"]["VAEOutput"] | components["schemas"]["StringCollectionOutput"] | components["schemas"]["CLIPOutput"] | components["schemas"]["BooleanOutput"] | components["schemas"]["FloatOutput"] | components["schemas"]["String2Output"] | components["schemas"]["FaceOffOutput"] | components["schemas"]["IPAdapterOutput"] | components["schemas"]["IntegerCollectionOutput"] | components["schemas"]["SDXLLoRALoaderOutput"] | components["schemas"]["LatentsOutput"] | components["schemas"]["GradientMaskOutput"] | components["schemas"]["ColorOutput"] | components["schemas"]["ConditioningCollectionOutput"] | components["schemas"]["ColorCollectionOutput"] | components["schemas"]["PairTileImageOutput"] | components["schemas"]["SDXLModelLoaderOutput"] | components["schemas"]["T2IAdapterOutput"] | components["schemas"]["DenoiseMaskOutput"] | components["schemas"]["StringOutput"] | components["schemas"]["BooleanCollectionOutput"];
       };
       /**
        * Errors
@@ -4306,6 +4321,7 @@ export type components = {
       /**
        * Description
        * @description Model description
+       * @default null
        */
       description?: string | null;
       /**
@@ -4318,11 +4334,13 @@ export type components = {
       /**
        * Source Api Response
        * @description The original API response from the source, as stringified JSON.
+       * @default null
        */
       source_api_response?: string | null;
       /**
        * Cover Image
        * @description Url for image to preview model
+       * @default null
        */
       cover_image?: string | null;
       /**
@@ -6357,6 +6375,7 @@ export type components = {
       /**
        * Description
        * @description Model description
+       * @default null
        */
       description?: string | null;
       /**
@@ -6369,11 +6388,13 @@ export type components = {
       /**
        * Source Api Response
        * @description The original API response from the source, as stringified JSON.
+       * @default null
        */
       source_api_response?: string | null;
       /**
        * Cover Image
        * @description Url for image to preview model
+       * @default null
        */
       cover_image?: string | null;
       /**
@@ -6385,6 +6406,7 @@ export type components = {
       /**
        * Trigger Phrases
        * @description Set of trigger phrases for this model
+       * @default null
        */
       trigger_phrases?: string[] | null;
       /**
@@ -6508,6 +6530,7 @@ export type components = {
       /**
        * Description
        * @description Model description
+       * @default null
        */
       description?: string | null;
       /**
@@ -6520,11 +6543,13 @@ export type components = {
       /**
        * Source Api Response
        * @description The original API response from the source, as stringified JSON.
+       * @default null
        */
       source_api_response?: string | null;
       /**
        * Cover Image
        * @description Url for image to preview model
+       * @default null
        */
       cover_image?: string | null;
       /**
@@ -6536,6 +6561,7 @@ export type components = {
       /**
        * Trigger Phrases
        * @description Set of trigger phrases for this model
+       * @default null
        */
       trigger_phrases?: string[] | null;
       /**
@@ -6612,6 +6638,7 @@ export type components = {
       /**
        * Description
        * @description Model description
+       * @default null
        */
       description?: string | null;
       /**
@@ -6624,11 +6651,13 @@ export type components = {
       /**
        * Source Api Response
        * @description The original API response from the source, as stringified JSON.
+       * @default null
        */
       source_api_response?: string | null;
       /**
        * Cover Image
        * @description Url for image to preview model
+       * @default null
        */
       cover_image?: string | null;
       /**
@@ -6640,9 +6669,13 @@ export type components = {
       /**
        * Trigger Phrases
        * @description Set of trigger phrases for this model
+       * @default null
        */
       trigger_phrases?: string[] | null;
-      /** @description Default settings for this model */
+      /**
+       * @description Default settings for this model
+       * @default null
+       */
       default_settings?: components["schemas"]["MainModelDefaultSettings"] | null;
       /**
        * Format
@@ -6700,6 +6733,7 @@ export type components = {
       /**
        * Description
        * @description Model description
+       * @default null
        */
       description?: string | null;
       /**
@@ -6712,11 +6746,13 @@ export type components = {
       /**
        * Source Api Response
        * @description The original API response from the source, as stringified JSON.
+       * @default null
        */
       source_api_response?: string | null;
       /**
        * Cover Image
        * @description Url for image to preview model
+       * @default null
        */
       cover_image?: string | null;
       /**
@@ -6728,9 +6764,13 @@ export type components = {
       /**
        * Trigger Phrases
        * @description Set of trigger phrases for this model
+       * @default null
        */
       trigger_phrases?: string[] | null;
-      /** @description Default settings for this model */
+      /**
+       * @description Default settings for this model
+       * @default null
+       */
       default_settings?: components["schemas"]["MainModelDefaultSettings"] | null;
       /**
        * Format
@@ -9663,7 +9703,10 @@ export type components = {
      * @description Model config for T2I.
      */
     T2IAdapterConfig: {
-      /** @description Default settings for this model */
+      /**
+       * @description Default settings for this model
+       * @default null
+       */
       default_settings?: components["schemas"]["ControlAdapterDefaultSettings"] | null;
       /**
        * Key
@@ -9690,6 +9733,7 @@ export type components = {
       /**
        * Description
        * @description Model description
+       * @default null
        */
       description?: string | null;
       /**
@@ -9702,11 +9746,13 @@ export type components = {
       /**
        * Source Api Response
        * @description The original API response from the source, as stringified JSON.
+       * @default null
        */
       source_api_response?: string | null;
       /**
        * Cover Image
        * @description Url for image to preview model
+       * @default null
        */
       cover_image?: string | null;
       /**
@@ -9901,6 +9947,7 @@ export type components = {
       /**
        * Description
        * @description Model description
+       * @default null
        */
       description?: string | null;
       /**
@@ -9913,11 +9960,13 @@ export type components = {
       /**
        * Source Api Response
        * @description The original API response from the source, as stringified JSON.
+       * @default null
        */
       source_api_response?: string | null;
       /**
        * Cover Image
        * @description Url for image to preview model
+       * @default null
        */
       cover_image?: string | null;
       /**
@@ -9963,6 +10012,7 @@ export type components = {
       /**
        * Description
        * @description Model description
+       * @default null
        */
       description?: string | null;
       /**
@@ -9975,11 +10025,13 @@ export type components = {
       /**
        * Source Api Response
        * @description The original API response from the source, as stringified JSON.
+       * @default null
        */
       source_api_response?: string | null;
       /**
        * Cover Image
        * @description Url for image to preview model
+       * @default null
        */
       cover_image?: string | null;
       /**
@@ -10286,6 +10338,7 @@ export type components = {
       /**
        * Description
        * @description Model description
+       * @default null
        */
       description?: string | null;
       /**
@@ -10298,11 +10351,13 @@ export type components = {
       /**
        * Source Api Response
        * @description The original API response from the source, as stringified JSON.
+       * @default null
        */
       source_api_response?: string | null;
       /**
        * Cover Image
        * @description Url for image to preview model
+       * @default null
        */
       cover_image?: string | null;
       /**
@@ -10358,6 +10413,7 @@ export type components = {
       /**
        * Description
        * @description Model description
+       * @default null
        */
       description?: string | null;
       /**
@@ -10370,11 +10426,13 @@ export type components = {
       /**
        * Source Api Response
        * @description The original API response from the source, as stringified JSON.
+       * @default null
        */
       source_api_response?: string | null;
       /**
        * Cover Image
        * @description Url for image to preview model
+       * @default null
        */
       cover_image?: string | null;
       /**
@@ -10894,6 +10952,716 @@ export type components = {
      * @enum {string}
      */
     UIType: "MainModelField" | "SDXLMainModelField" | "SDXLRefinerModelField" | "ONNXModelField" | "VAEModelField" | "LoRAModelField" | "ControlNetModelField" | "IPAdapterModelField" | "T2IAdapterModelField" | "SchedulerField" | "AnyField" | "CollectionField" | "CollectionItemField" | "DEPRECATED_Boolean" | "DEPRECATED_Color" | "DEPRECATED_Conditioning" | "DEPRECATED_Control" | "DEPRECATED_Float" | "DEPRECATED_Image" | "DEPRECATED_Integer" | "DEPRECATED_Latents" | "DEPRECATED_String" | "DEPRECATED_BooleanCollection" | "DEPRECATED_ColorCollection" | "DEPRECATED_ConditioningCollection" | "DEPRECATED_ControlCollection" | "DEPRECATED_FloatCollection" | "DEPRECATED_ImageCollection" | "DEPRECATED_IntegerCollection" | "DEPRECATED_LatentsCollection" | "DEPRECATED_StringCollection" | "DEPRECATED_BooleanPolymorphic" | "DEPRECATED_ColorPolymorphic" | "DEPRECATED_ConditioningPolymorphic" | "DEPRECATED_ControlPolymorphic" | "DEPRECATED_FloatPolymorphic" | "DEPRECATED_ImagePolymorphic" | "DEPRECATED_IntegerPolymorphic" | "DEPRECATED_LatentsPolymorphic" | "DEPRECATED_StringPolymorphic" | "DEPRECATED_UNet" | "DEPRECATED_Vae" | "DEPRECATED_CLIP" | "DEPRECATED_Collection" | "DEPRECATED_CollectionItem" | "DEPRECATED_Enum" | "DEPRECATED_WorkflowField" | "DEPRECATED_IsIntermediate" | "DEPRECATED_BoardField" | "DEPRECATED_MetadataItem" | "DEPRECATED_MetadataItemCollection" | "DEPRECATED_MetadataItemPolymorphic" | "DEPRECATED_MetadataDict";
+    /**
+     * InvocationStartedEvent
+     * @description Emitted when an invocation is started
+     */
+    InvocationStartedEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Queue Id
+       * @description The ID of the queue
+       */
+      queue_id: string;
+      /**
+       * Item Id
+       * @description The ID of the queue item
+       */
+      item_id: number;
+      /**
+       * Batch Id
+       * @description The ID of the queue batch
+       */
+      batch_id: string;
+      /**
+       * Session Id
+       * @description The ID of the session (aka graph execution state)
+       */
+      session_id: string;
+      /**
+       * Invocation Id
+       * @description The ID of the invocation
+       */
+      invocation_id: string;
+      /**
+       * Invocation Source Id
+       * @description The ID of the prepared invocation's source node
+       */
+      invocation_source_id: string;
+      /**
+       * Invocation Type
+       * @description The type of invocation
+       */
+      invocation_type: string;
+    };
+    /**
+     * InvocationDenoiseProgressEvent
+     * @description Emitted at each step during denoising of an invocation.
+     */
+    InvocationDenoiseProgressEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Queue Id
+       * @description The ID of the queue
+       */
+      queue_id: string;
+      /**
+       * Item Id
+       * @description The ID of the queue item
+       */
+      item_id: number;
+      /**
+       * Batch Id
+       * @description The ID of the queue batch
+       */
+      batch_id: string;
+      /**
+       * Session Id
+       * @description The ID of the session (aka graph execution state)
+       */
+      session_id: string;
+      /**
+       * Invocation Id
+       * @description The ID of the invocation
+       */
+      invocation_id: string;
+      /**
+       * Invocation Source Id
+       * @description The ID of the prepared invocation's source node
+       */
+      invocation_source_id: string;
+      /**
+       * Invocation Type
+       * @description The type of invocation
+       */
+      invocation_type: string;
+      /** @description The progress image sent at each step during processing */
+      progress_image: components["schemas"]["ProgressImage"];
+      /**
+       * Step
+       * @description The current step of the invocation
+       */
+      step: number;
+      /**
+       * Total Steps
+       * @description The total number of steps in the invocation
+       */
+      total_steps: number;
+    };
+    /**
+     * BaseInvocationOutput
+     * @description Base class for all invocation outputs.
+     *
+     * All invocation outputs must use the `@invocation_output` decorator to provide their unique type.
+     */
+    BaseInvocationOutput: Record<string, never>;
+    /**
+     * InvocationCompleteEvent
+     * @description Emitted when an invocation is complete
+     */
+    InvocationCompleteEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Queue Id
+       * @description The ID of the queue
+       */
+      queue_id: string;
+      /**
+       * Item Id
+       * @description The ID of the queue item
+       */
+      item_id: number;
+      /**
+       * Batch Id
+       * @description The ID of the queue batch
+       */
+      batch_id: string;
+      /**
+       * Session Id
+       * @description The ID of the session (aka graph execution state)
+       */
+      session_id: string;
+      /**
+       * Invocation Id
+       * @description The ID of the invocation
+       */
+      invocation_id: string;
+      /**
+       * Invocation Source Id
+       * @description The ID of the prepared invocation's source node
+       */
+      invocation_source_id: string;
+      /**
+       * Invocation Type
+       * @description The type of invocation
+       */
+      invocation_type: string;
+      /** @description The result of the invocation */
+      result: components["schemas"]["BaseInvocationOutput"];
+    };
+    /**
+     * InvocationErrorEvent
+     * @description Emitted when an invocation encounters an error
+     */
+    InvocationErrorEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Queue Id
+       * @description The ID of the queue
+       */
+      queue_id: string;
+      /**
+       * Item Id
+       * @description The ID of the queue item
+       */
+      item_id: number;
+      /**
+       * Batch Id
+       * @description The ID of the queue batch
+       */
+      batch_id: string;
+      /**
+       * Session Id
+       * @description The ID of the session (aka graph execution state)
+       */
+      session_id: string;
+      /**
+       * Invocation Id
+       * @description The ID of the invocation
+       */
+      invocation_id: string;
+      /**
+       * Invocation Source Id
+       * @description The ID of the prepared invocation's source node
+       */
+      invocation_source_id: string;
+      /**
+       * Invocation Type
+       * @description The type of invocation
+       */
+      invocation_type: string;
+      /**
+       * Error Type
+       * @description The type of error
+       */
+      error_type: string;
+      /**
+       * Error
+       * @description The error message
+       */
+      error: string;
+    };
+    /**
+     * SessionStartedEvent
+     * @description Emitted when a session has started
+     */
+    SessionStartedEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Queue Id
+       * @description The ID of the queue
+       */
+      queue_id: string;
+      /**
+       * Item Id
+       * @description The ID of the queue item
+       */
+      item_id: number;
+      /**
+       * Batch Id
+       * @description The ID of the queue batch
+       */
+      batch_id: string;
+      /**
+       * Session Id
+       * @description The ID of the session (aka graph execution state)
+       */
+      session_id: string;
+    };
+    /**
+     * SessionCompleteEvent
+     * @description Emitted when a session has completed all invocations
+     */
+    SessionCompleteEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Queue Id
+       * @description The ID of the queue
+       */
+      queue_id: string;
+      /**
+       * Item Id
+       * @description The ID of the queue item
+       */
+      item_id: number;
+      /**
+       * Batch Id
+       * @description The ID of the queue batch
+       */
+      batch_id: string;
+      /**
+       * Session Id
+       * @description The ID of the session (aka graph execution state)
+       */
+      session_id: string;
+    };
+    /**
+     * SessionCanceledEvent
+     * @description Emitted when a session is canceled
+     */
+    SessionCanceledEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Queue Id
+       * @description The ID of the queue
+       */
+      queue_id: string;
+      /**
+       * Item Id
+       * @description The ID of the queue item
+       */
+      item_id: number;
+      /**
+       * Batch Id
+       * @description The ID of the queue batch
+       */
+      batch_id: string;
+      /**
+       * Session Id
+       * @description The ID of the session (aka graph execution state)
+       */
+      session_id: string;
+    };
+    /**
+     * QueueItemStatusChangedEvent
+     * @description Emitted when a queue item's status changes
+     */
+    QueueItemStatusChangedEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Queue Id
+       * @description The ID of the queue
+       */
+      queue_id: string;
+      /**
+       * Item Id
+       * @description The ID of the queue item
+       */
+      item_id: number;
+      /**
+       * Batch Id
+       * @description The ID of the queue batch
+       */
+      batch_id: string;
+      /**
+       * Status
+       * @description The new status of the queue item
+       * @enum {string}
+       */
+      status: "pending" | "in_progress" | "completed" | "failed" | "canceled";
+      /**
+       * Error
+       * @description The error message, if any
+       * @default null
+       */
+      error: string | null;
+      /**
+       * Created At
+       * @description The timestamp when the queue item was created
+       * @default null
+       */
+      created_at: string | null;
+      /**
+       * Updated At
+       * @description The timestamp when the queue item was last updated
+       * @default null
+       */
+      updated_at: string | null;
+      /**
+       * Started At
+       * @description The timestamp when the queue item was started
+       * @default null
+       */
+      started_at: string | null;
+      /**
+       * Completed At
+       * @description The timestamp when the queue item was completed
+       * @default null
+       */
+      completed_at: string | null;
+      /** @description The status of the batch */
+      batch_status: components["schemas"]["BatchStatus"];
+      /** @description The status of the queue */
+      queue_status: components["schemas"]["SessionQueueStatus"];
+    };
+    /**
+     * BatchEnqueuedEvent
+     * @description Emitted when a batch is enqueued
+     */
+    BatchEnqueuedEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Queue Id
+       * @description The ID of the queue
+       */
+      queue_id: string;
+      /**
+       * Batch Id
+       * @description The ID of the batch
+       */
+      batch_id: string;
+      /**
+       * Enqueued
+       * @description The number of invocations enqueued
+       */
+      enqueued: number;
+      /**
+       * Requested
+       * @description The number of invocations initially requested to be enqueued (may be less than enqueued if queue was full)
+       */
+      requested: number;
+      /**
+       * Priority
+       * @description The priority of the batch
+       */
+      priority: number;
+    };
+    /**
+     * QueueClearedEvent
+     * @description Emitted when a queue is cleared
+     */
+    QueueClearedEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Queue Id
+       * @description The ID of the queue
+       */
+      queue_id: string;
+    };
+    /**
+     * DownloadStartedEvent
+     * @description Emitted when a download is started
+     */
+    DownloadStartedEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Source
+       * @description The source of the download
+       */
+      source: string;
+      /**
+       * Download Path
+       * @description The local path where the download is saved
+       */
+      download_path: string;
+    };
+    /**
+     * DownloadProgressEvent
+     * @description Emitted at intervals during a download
+     */
+    DownloadProgressEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Source
+       * @description The source of the download
+       */
+      source: string;
+      /**
+       * Download Path
+       * @description The local path where the download is saved
+       */
+      download_path: string;
+      /**
+       * Current Bytes
+       * @description The number of bytes downloaded so far
+       */
+      current_bytes: number;
+      /**
+       * Total Bytes
+       * @description The total number of bytes to be downloaded
+       */
+      total_bytes: number;
+    };
+    /**
+     * DownloadCompleteEvent
+     * @description Emitted when a download is completed
+     */
+    DownloadCompleteEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Source
+       * @description The source of the download
+       */
+      source: string;
+      /**
+       * Download Path
+       * @description The local path where the download is saved
+       */
+      download_path: string;
+      /**
+       * Total Bytes
+       * @description The total number of bytes downloaded
+       */
+      total_bytes: number;
+    };
+    /**
+     * DownloadCancelledEvent
+     * @description Emitted when a download is cancelled
+     */
+    DownloadCancelledEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Source
+       * @description The source of the download
+       */
+      source: string;
+    };
+    /**
+     * DownloadErrorEvent
+     * @description Emitted when a download encounters an error
+     */
+    DownloadErrorEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Source
+       * @description The source of the download
+       */
+      source: string;
+      /**
+       * Error Type
+       * @description The type of error
+       */
+      error_type: string;
+      /**
+       * Error
+       * @description The error message
+       */
+      error: string;
+    };
+    /**
+     * ModelLoadStartedEvent
+     * @description Emitted when a model is requested
+     */
+    ModelLoadStartedEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Config
+       * @description The model's config
+       */
+      config: components["schemas"]["MainDiffusersConfig"] | components["schemas"]["MainCheckpointConfig"] | components["schemas"]["VAEDiffusersConfig"] | components["schemas"]["VAECheckpointConfig"] | components["schemas"]["ControlNetDiffusersConfig"] | components["schemas"]["ControlNetCheckpointConfig"] | components["schemas"]["LoRALyCORISConfig"] | components["schemas"]["LoRADiffusersConfig"] | components["schemas"]["TextualInversionFileConfig"] | components["schemas"]["TextualInversionFolderConfig"] | components["schemas"]["IPAdapterConfig"] | components["schemas"]["T2IAdapterConfig"] | components["schemas"]["CLIPVisionDiffusersConfig"];
+      /**
+       * @description The submodel type, if any
+       * @default null
+       */
+      submodel_type: components["schemas"]["SubModelType"] | null;
+    };
+    /**
+     * ModelLoadCompleteEvent
+     * @description Emitted when a model is requested
+     */
+    ModelLoadCompleteEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Config
+       * @description The model's config
+       */
+      config: components["schemas"]["MainDiffusersConfig"] | components["schemas"]["MainCheckpointConfig"] | components["schemas"]["VAEDiffusersConfig"] | components["schemas"]["VAECheckpointConfig"] | components["schemas"]["ControlNetDiffusersConfig"] | components["schemas"]["ControlNetCheckpointConfig"] | components["schemas"]["LoRALyCORISConfig"] | components["schemas"]["LoRADiffusersConfig"] | components["schemas"]["TextualInversionFileConfig"] | components["schemas"]["TextualInversionFolderConfig"] | components["schemas"]["IPAdapterConfig"] | components["schemas"]["T2IAdapterConfig"] | components["schemas"]["CLIPVisionDiffusersConfig"];
+      /**
+       * @description The submodel type, if any
+       * @default null
+       */
+      submodel_type: components["schemas"]["SubModelType"] | null;
+    };
+    /**
+     * ModelInstallDownloadProgressEvent
+     * @description Emitted at intervals while the install job is in progress (remote models only).
+     */
+    ModelInstallDownloadProgressEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Source
+       * @description Source of the model; local path, repo_id or url
+       */
+      source: string;
+      /**
+       * Local Path
+       * @description Where model is downloading to
+       */
+      local_path: string;
+      /**
+       * Bytes
+       * @description Number of bytes downloaded so far
+       */
+      bytes: number;
+      /**
+       * Total Bytes
+       * @description Total size of download, including all files
+       */
+      total_bytes: number;
+      /**
+       * Parts
+       * @description Progress of downloading URLs that comprise the model, if any
+       */
+      parts: ({
+          [key: string]: number | string;
+        })[];
+    };
+    /**
+     * ModelInstallStartedEvent
+     * @description Emitted once when an install job becomes active.
+     */
+    ModelInstallStartedEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Source
+       * @description Source of the model; local path, repo_id or url
+       */
+      source: string;
+    };
+    /**
+     * ModelInstallCompletedEvent
+     * @description Emitted when an install job is completed successfully.
+     */
+    ModelInstallCompletedEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Source
+       * @description Source of the model; local path, repo_id or url
+       */
+      source: string;
+      /**
+       * Key
+       * @description Model config record key
+       */
+      key: string;
+      /**
+       * Total Bytes
+       * @description Size of the model (may be None for installation of a local path)
+       */
+      total_bytes: number | null;
+    };
+    /**
+     * ModelInstalLCancelledEvent
+     * @description Emitted when an install job is cancelled.
+     */
+    ModelInstalLCancelledEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Source
+       * @description Source of the model; local path, repo_id or url
+       */
+      source: string;
+    };
+    /**
+     * ModelInstallErrorEvent
+     * @description Emitted when an install job encounters an exception.
+     */
+    ModelInstallErrorEvent: {
+      /**
+       * Timestamp
+       * @description The timestamp of the event
+       */
+      timestamp: number;
+      /**
+       * Source
+       * @description Source of the model; local path, repo_id or url
+       */
+      source: string;
+      /**
+       * Error Type
+       * @description The name of the exception
+       */
+      error_type: string;
+      /**
+       * Error
+       * @description A text description of the exception
+       */
+      error: string;
+    };
   };
   responses: never;
   parameters: never;
