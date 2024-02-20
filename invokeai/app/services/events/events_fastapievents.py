@@ -6,7 +6,7 @@ from queue import Empty, Queue
 
 from fastapi_events.dispatcher import dispatch
 
-from invokeai.app.services.events.events_common import AppEvent
+from invokeai.app.services.events.events_common import BaseEvent
 
 from .events_base import EventServiceBase
 
@@ -14,7 +14,7 @@ from .events_base import EventServiceBase
 class FastAPIEventService(EventServiceBase):
     def __init__(self, event_handler_id: int) -> None:
         self.event_handler_id = event_handler_id
-        self._queue = Queue[AppEvent | None]()
+        self._queue = Queue[BaseEvent | None]()
         self._stop_event = threading.Event()
         asyncio.create_task(self._dispatch_from_queue(stop_event=self._stop_event))
 
@@ -24,7 +24,7 @@ class FastAPIEventService(EventServiceBase):
         self._stop_event.set()
         self._queue.put(None)
 
-    def dispatch(self, event: AppEvent) -> None:
+    def dispatch(self, event: BaseEvent) -> None:
         self._queue.put(event)
 
     async def _dispatch_from_queue(self, stop_event: threading.Event):
