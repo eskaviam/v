@@ -71,9 +71,9 @@ type ClientEmitSubscribeQueue = {
 
 export type ClientEmitUnsubscribeQueue = ClientEmitSubscribeQueue;
 
-export type BulkDownloadStartedEvent = S['BulkDownloadStartedEvent']
-export type BulkDownloadCompleteEvent = S['BulkDownloadCompleteEvent']
-export type BulkDownloadFailedEvent = S['BulkDownloadErrorEvent']
+export type BulkDownloadStartedEvent = S['BulkDownloadStartedEvent'];
+export type BulkDownloadCompleteEvent = S['BulkDownloadCompleteEvent'];
+export type BulkDownloadFailedEvent = S['BulkDownloadErrorEvent'];
 
 type ClientEmitSubscribeBulkDownload = {
   bulk_download_id: string;
