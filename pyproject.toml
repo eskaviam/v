@@ -54,7 +54,7 @@ dependencies = [
   "transformers==4.38.2",
 
   # Core application dependencies, pinned for reproducible builds.
-  "fastapi-events==0.10.1",
+  "fastapi-events@https://github.com/melvinkcx/fastapi-events/archive/708b3a6c52ae57709acd5a2acf3c74d6ec3367fd.zip",
   "fastapi==0.109.2",
   "huggingface-hub==0.21.3",
   "pydantic-settings==2.1.0",
