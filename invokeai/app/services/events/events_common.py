@@ -533,7 +533,7 @@ class ModelInstallErrorEvent(ModelEvent):
         return cls(source=source, error_type=error_type, error=error)
 
 
-class BulkDownloadEvent(AppEvent, ABC):
+class BulkDownloadEvent(BaseEvent, ABC):
     """Base class for events associated with a bulk image download"""
 
     __event_type__ = EventType.BULK_IMAGE_DOWNLOAD
