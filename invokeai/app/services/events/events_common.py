@@ -1,6 +1,6 @@
 from abc import ABC
 from enum import Enum
-from typing import Any, ClassVar, Coroutine, Optional, Protocol, TypeAlias, TypeVar
+from typing import TYPE_CHECKING, Any, ClassVar, Coroutine, Optional, Protocol, TypeAlias, TypeVar
 
 from fastapi_events.handlers.local import local_handler
 from fastapi_events.registry.payload_schema import registry as payload_schema
@@ -17,6 +17,9 @@ from invokeai.app.services.session_queue.session_queue_common import (
 )
 from invokeai.app.util.misc import get_timestamp
 from invokeai.backend.model_manager.config import AnyModelConfig, SubModelType
+
+if TYPE_CHECKING:
+    from invokeai.app.services.model_install.model_install_common import ModelInstallJob
 
 
 class EventType(str, Enum):
@@ -451,6 +454,7 @@ class ModelInstallDownloadProgressEvent(ModelEvent):
 
     __event_name__ = "model_install_download_progress"
 
+    id: int = Field(description="The ID of the install job")
     source: str = Field(description="Source of the model; local path, repo_id or url")
     local_path: str = Field(description="Where model is downloading to")
     bytes: int = Field(description="Number of bytes downloaded so far")
@@ -460,20 +464,23 @@ class ModelInstallDownloadProgressEvent(ModelEvent):
     )
 
     @classmethod
-    def build(
-        cls,
-        source: str,
-        local_path: str,
-        bytes: int,
-        total_bytes: int,
-        parts: list[dict[str, int | str]],
-    ) -> "ModelInstallDownloadProgressEvent":
+    def build(cls, job: "ModelInstallJob") -> "ModelInstallDownloadProgressEvent":
+        parts: list[dict[str, str | int]] = [
+            {
+                "url": str(x.source),
+                "local_path": str(x.download_path),
+                "bytes": x.bytes,
+                "total_bytes": x.total_bytes,
+            }
+            for x in job.download_parts
+        ]
         return cls(
-            source=source,
-            local_path=local_path,
-            bytes=bytes,
-            total_bytes=total_bytes,
+            id=job.id,
+            source=str(job.source),
+            local_path=job.local_path.as_posix(),
             parts=parts,
+            bytes=job.bytes,
+            total_bytes=job.total_bytes,
         )
 
 
@@ -483,39 +490,43 @@ class ModelInstallStartedEvent(ModelEvent):
 
     __event_name__ = "model_install_started"
 
+    id: int = Field(description="The ID of the install job")
     source: str = Field(description="Source of the model; local path, repo_id or url")
 
     @classmethod
-    def build(cls, source: str) -> "ModelInstallStartedEvent":
-        return cls(source=source)
+    def build(cls, job: "ModelInstallJob") -> "ModelInstallStartedEvent":
+        return cls(id=job.id, source=str(job.source))
 
 
 @payload_schema.register  # pyright: ignore [reportUnknownMemberType]
-class ModelInstallCompletedEvent(ModelEvent):
+class ModelInstallCompleteEvent(ModelEvent):
     """Emitted when an install job is completed successfully."""
 
-    __event_name__ = "model_install_completed"
+    __event_name__ = "model_install_complete"
 
+    id: int = Field(description="The ID of the install job")
     source: str = Field(description="Source of the model; local path, repo_id or url")
     key: str = Field(description="Model config record key")
     total_bytes: Optional[int] = Field(description="Size of the model (may be None for installation of a local path)")
 
     @classmethod
-    def build(cls, source: str, key: str, total_bytes: Optional[int]) -> "ModelInstallCompletedEvent":
-        return cls(source=source, key=key, total_bytes=total_bytes)
+    def build(cls, job: "ModelInstallJob") -> "ModelInstallCompleteEvent":
+        assert job.config_out is not None
+        return cls(id=job.id, source=str(job.source), key=(job.config_out.key), total_bytes=job.total_bytes)
 
 
 @payload_schema.register  # pyright: ignore [reportUnknownMemberType]
-class ModelInstalLCancelledEvent(ModelEvent):
+class ModelInstallCancelledEvent(ModelEvent):
     """Emitted when an install job is cancelled."""
 
     __event_name__ = "model_install_cancelled"
 
+    id: int = Field(description="The ID of the install job")
     source: str = Field(description="Source of the model; local path, repo_id or url")
 
     @classmethod
-    def build(cls, source: str) -> "ModelInstalLCancelledEvent":
-        return cls(source=source)
+    def build(cls, job: "ModelInstallJob") -> "ModelInstallCancelledEvent":
+        return cls(id=job.id, source=str(job.source))
 
 
 @payload_schema.register  # pyright: ignore [reportUnknownMemberType]
@@ -524,13 +535,16 @@ class ModelInstallErrorEvent(ModelEvent):
 
     __event_name__ = "model_install_error"
 
+    id: int = Field(description="The ID of the install job")
     source: str = Field(description="Source of the model; local path, repo_id or url")
     error_type: str = Field(description="The name of the exception")
     error: str = Field(description="A text description of the exception")
 
     @classmethod
-    def build(cls, source: str, error_type: str, error: str) -> "ModelInstallErrorEvent":
-        return cls(source=source, error_type=error_type, error=error)
+    def build(cls, job: "ModelInstallJob") -> "ModelInstallErrorEvent":
+        assert job.error_type is not None
+        assert job.error is not None
+        return cls(id=job.id, source=str(job.source), error_type=job.error_type, error=job.error)
 
 
 class BulkDownloadEvent(BaseEvent, ABC):
