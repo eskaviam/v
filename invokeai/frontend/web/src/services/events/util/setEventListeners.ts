@@ -15,9 +15,11 @@ import {
   socketInvocationComplete,
   socketInvocationError,
   socketInvocationStarted,
-  socketModelInstallCompleted,
-  socketModelInstallDownloading,
+  socketModelInstallCancelled,
+  socketModelInstallComplete,
+  socketModelInstallDownloadProgress,
   socketModelInstallError,
+  socketModelInstallStarted,
   socketModelLoadComplete,
   socketModelLoadStarted,
   socketQueueItemStatusChanged,
@@ -94,16 +96,24 @@ export const setEventListeners = (arg: SetEventListenersArg) => {
     dispatch(socketModelLoadComplete({ data }));
   });
 
-  socket.on('model_install_downloading', (data) => {
-    dispatch(socketModelInstallDownloading({ data }));
+  socket.on('model_install_started', (data) => {
+    dispatch(socketModelInstallStarted({ data }));
   });
 
-  socket.on('model_install_completed', (data) => {
-    dispatch(socketModelInstallCompleted({ data }));
+  socket.on('model_install_download_progress', (data) => {
+    dispatch(socketModelInstallDownloadProgress({ data }));
+  });
+
+  socket.on('model_install_complete', (data) => {
+    dispatch(socketModelInstallComplete({ data }));
   });
 
   socket.on('model_install_error', (data) => {
     dispatch(socketModelInstallError({ data }));
+  });
+
+  socket.on('model_install_cancelled', (data) => {
+    dispatch(socketModelInstallCancelled({ data }));
   });
 
   socket.on('queue_item_status_changed', (data) => {

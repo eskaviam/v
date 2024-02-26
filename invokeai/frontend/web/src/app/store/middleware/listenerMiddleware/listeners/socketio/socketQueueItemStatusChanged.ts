@@ -23,10 +23,9 @@ export const addSocketQueueItemStatusChangedEventListener = (startAppListening: 
             changes: {
               status,
               started_at,
-              updated_at,
+              updated_at: updated_at ?? undefined,
               error,
-              completed_at,
-              created_at,
+              completed_at: completed_at ?? undefined,
             },
           });
         })

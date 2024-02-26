@@ -7,9 +7,11 @@ import type {
   InvocationDenoiseProgressEvent,
   InvocationErrorEvent,
   InvocationStartedEvent,
-  ModelInstallCompletedEvent,
-  ModelInstallDownloadingEvent,
+  ModelInstallCancelledEvent,
+  ModelInstallCompleteEvent,
+  ModelInstallDownloadProgressEvent,
   ModelInstallErrorEvent,
+  ModelInstallStartedEvent,
   ModelLoadCompleteEvent,
   ModelLoadStartedEvent,
   QueueItemStatusChangedEvent,
@@ -57,17 +59,25 @@ export const socketModelLoadComplete = createAction<{
   data: ModelLoadCompleteEvent;
 }>('socket/socketModelLoadComplete');
 
-export const socketModelInstallDownloading = createAction<{
-  data: ModelInstallDownloadingEvent;
-}>('socket/socketModelInstallDownloading');
+export const socketModelInstallStarted = createAction<{
+  data: ModelInstallStartedEvent;
+}>('socket/socketModelInstallStarted');
 
-export const socketModelInstallCompleted = createAction<{
-  data: ModelInstallCompletedEvent;
-}>('socket/socketModelInstallCompleted');
+export const socketModelInstallDownloadProgress = createAction<{
+  data: ModelInstallDownloadProgressEvent;
+}>('socket/socketModelInstallDownloadProgress');
+
+export const socketModelInstallComplete = createAction<{
+  data: ModelInstallCompleteEvent;
+}>('socket/socketModelInstallComplete');
 
 export const socketModelInstallError = createAction<{
   data: ModelInstallErrorEvent;
 }>('socket/socketModelInstallError');
+
+export const socketModelInstallCancelled = createAction<{
+  data: ModelInstallCancelledEvent;
+}>('socket/socketModelInstallCancelled');
 
 export const socketQueueItemStatusChanged = createAction<{
   data: QueueItemStatusChangedEvent;
