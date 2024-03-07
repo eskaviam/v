@@ -246,6 +246,13 @@ export const modelsApi = api.injectEndpoints({
         };
       },
     }),
+    getHuggingFaceModels: build.query<string[], string>({
+      query: (hugging_face_repo) => {
+        return {
+          url: buildModelsUrl(`hugging_face?hugging_face_repo=${hugging_face_repo}`),
+        };
+      },
+    }),
     listModelInstalls: build.query<ListModelInstallsResponse, void>({
       query: () => {
         return {
@@ -369,6 +376,7 @@ export const {
   useConvertModelMutation,
   useSyncModelsMutation,
   useLazyScanFolderQuery,
+  useLazyGetHuggingFaceModelsQuery,
   useListModelInstallsQuery,
   useCancelModelInstallMutation,
   usePruneCompletedModelInstallsMutation,
