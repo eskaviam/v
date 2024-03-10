@@ -18,9 +18,18 @@ from pathlib import Path
 from typing import Any, ClassVar, Dict, List, Literal, Optional, Union, get_args, get_origin, get_type_hints
 
 from omegaconf import DictConfig, ListConfig, OmegaConf
+from pydantic import BaseModel
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from invokeai.app.services.config.config_common import PagingArgumentParser, int_or_float_or_str
+
+
+def serialize_setting_value(value: Any) -> Any:
+    if isinstance(value, BaseModel):
+        return value.model_dump()
+    if isinstance(value, Path):
+        return str(value)
+    return value
 
 
 class InvokeAISettings(BaseSettings):
@@ -62,8 +71,7 @@ class InvokeAISettings(BaseSettings):
             assert isinstance(category, str)
             if category not in field_dict[type]:
                 field_dict[type][category] = {}
-            # keep paths as strings to make it easier to read
-            field_dict[type][category][name] = str(value) if isinstance(value, Path) else value
+            field_dict[type][category][name] = serialize_setting_value(value)
         conf = OmegaConf.create(field_dict)
         return OmegaConf.to_yaml(conf)
 
