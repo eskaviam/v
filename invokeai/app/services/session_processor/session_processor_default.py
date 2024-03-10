@@ -8,14 +8,9 @@ from invokeai.app.invocations.baseinvocation import BaseInvocation
 from invokeai.app.services.events.events_common import (
     BatchEnqueuedEvent,
     FastAPIEvent,
-    InvocationCompleteEvent,
-    InvocationErrorEvent,
-    InvocationStartedEvent,
     QueueClearedEvent,
     QueueEvent,
     SessionCanceledEvent,
-    SessionCompleteEvent,
-    SessionStartedEvent,
     register_events,
 )
 from invokeai.app.services.invocation_stats.invocation_stats_common import GESStatsNotFoundError
@@ -56,7 +51,7 @@ class DefaultSessionProcessor(SessionProcessorBase):
             else None
         )
 
-        register_events([SessionCanceledEvent, QueueClearedEvent, BatchEnqueuedEvent], self._on_queue_event)
+        register_events({SessionCanceledEvent, QueueClearedEvent, BatchEnqueuedEvent}, self._on_queue_event)
 
         self._thread = Thread(
             name="session_processor",
@@ -123,7 +118,7 @@ class DefaultSessionProcessor(SessionProcessorBase):
                     self._queue_item = self._invoker.services.session_queue.dequeue()
                     if self._queue_item is not None and resume_event.is_set():
                         # Dispatch session started event
-                        self._invoker.services.events.dispatch(SessionStartedEvent.build(queue_item=self._queue_item))
+                        self._invoker.services.events.emit_session_started(self._queue_item)
                         self._invoker.services.logger.debug(f"Executing queue item {self._queue_item.item_id}")
                         cancel_event.clear()
 
@@ -140,9 +135,7 @@ class DefaultSessionProcessor(SessionProcessorBase):
                             source_invocation_id = self._queue_item.session.prepared_source_mapping[self._invocation.id]
 
                             # Dispatch invocation started event
-                            self._invoker.services.events.dispatch(
-                                InvocationStartedEvent.build(queue_item=self._queue_item, invocation=self._invocation)
-                            )
+                            self._invoker.services.events.emit_invocation_started(self._queue_item, self._invocation)
 
                             # Innermost processor try block; any unhandled exception is an invocation error & will fail the graph
                             try:
@@ -170,10 +163,8 @@ class DefaultSessionProcessor(SessionProcessorBase):
                                     self._queue_item.session.complete(self._invocation.id, outputs)
 
                                     # Dispatch invocation complete event
-                                    self._invoker.services.events.dispatch(
-                                        InvocationCompleteEvent.build(
-                                            queue_item=self._queue_item, invocation=self._invocation, result=outputs
-                                        )
+                                    self._invoker.services.events.emit_invocation_complete(
+                                        self._queue_item, self._invocation, outputs
                                     )
 
                             except KeyboardInterrupt:
@@ -204,22 +195,15 @@ class DefaultSessionProcessor(SessionProcessorBase):
                                 self._invoker.services.logger.error(error)
 
                                 # Dispatch invocation error event
-                                self._invoker.services.events.dispatch(
-                                    InvocationErrorEvent.build(
-                                        queue_item=self._queue_item,
-                                        invocation=self._invocation,
-                                        error_type=e.__class__.__name__,
-                                        error=error,
-                                    )
+                                self._invoker.services.events.emit_invocation_error(
+                                    self._queue_item, self._invocation, e.__class__.__name__, error
                                 )
                                 pass
 
                             # The session is complete if the all invocations are complete or there was an error
                             if self._queue_item.session.is_complete() or cancel_event.is_set():
                                 # Dispatch session complete event
-                                self._invoker.services.events.dispatch(
-                                    SessionCompleteEvent.build(queue_item=self._queue_item)
-                                )
+                                self._invoker.services.events.emit_session_complete(self._queue_item)
                                 # If we are profiling, stop the profiler and dump the profile & stats
                                 if self._profiler:
                                     profile_path = self._profiler.stop()

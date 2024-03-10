@@ -6,7 +6,9 @@ from queue import Empty, Queue
 
 from fastapi_events.dispatcher import dispatch
 
-from invokeai.app.services.events.events_common import BaseEvent
+from invokeai.app.services.events.events_common import (
+    BaseEvent,
+)
 
 from .events_base import EventServiceBase
 

@@ -3,11 +3,8 @@ import threading
 from typing import Optional, Union, cast
 
 from invokeai.app.services.events.events_common import (
-    BatchEnqueuedEvent,
     FastAPIEvent,
     InvocationErrorEvent,
-    QueueClearedEvent,
-    QueueItemStatusChangedEvent,
     SessionCanceledEvent,
     SessionCompleteEvent,
     register_events,
@@ -48,9 +45,9 @@ class SqliteSessionQueue(SessionQueueBase):
         self._set_in_progress_to_canceled()
         prune_result = self.prune(DEFAULT_QUEUE_ID)
 
-        register_events(events=[InvocationErrorEvent], func=self._handle_error_event)
-        register_events(events=[SessionCompleteEvent], func=self._handle_complete_event)
-        register_events(events=[SessionCanceledEvent], func=self._handle_cancel_event)
+        register_events(events={InvocationErrorEvent}, func=self._handle_error_event)
+        register_events(events={SessionCompleteEvent}, func=self._handle_complete_event)
+        register_events(events={SessionCanceledEvent}, func=self._handle_cancel_event)
 
         if prune_result.deleted > 0:
             self.__invoker.services.logger.info(f"Pruned {prune_result.deleted} finished queue items")
@@ -184,7 +181,7 @@ class SqliteSessionQueue(SessionQueueBase):
             batch=batch,
             priority=priority,
         )
-        self.__invoker.services.events.dispatch(BatchEnqueuedEvent.build(enqueue_result))
+        self.__invoker.services.events.emit_batch_enqueued(enqueue_result)
         return enqueue_result
 
     def dequeue(self) -> Optional[SessionQueueItem]:
@@ -286,9 +283,7 @@ class SqliteSessionQueue(SessionQueueBase):
         queue_item = self.get_queue_item(item_id)
         batch_status = self.get_batch_status(queue_id=queue_item.queue_id, batch_id=queue_item.batch_id)
         queue_status = self.get_queue_status(queue_id=queue_item.queue_id)
-        self.__invoker.services.events.dispatch(
-            QueueItemStatusChangedEvent.build(queue_item, batch_status, queue_status)
-        )
+        self.__invoker.services.events.emit_queue_item_status_changed(queue_item, batch_status, queue_status)
         return queue_item
 
     def is_empty(self, queue_id: str) -> IsEmptyResult:
@@ -376,7 +371,7 @@ class SqliteSessionQueue(SessionQueueBase):
             raise
         finally:
             self.__lock.release()
-        self.__invoker.services.events.dispatch(QueueClearedEvent.build(queue_id))
+        self.__invoker.services.events.emit_queue_cleared(queue_id)
         return ClearResult(deleted=count)
 
     def prune(self, queue_id: str) -> PruneResult:
@@ -421,7 +416,7 @@ class SqliteSessionQueue(SessionQueueBase):
         if queue_item.status not in ["canceled", "failed", "completed"]:
             status = "failed" if error is not None else "canceled"
             queue_item = self._set_queue_item_status(item_id=item_id, status=status, error=error)  # type: ignore [arg-type] # mypy seems to not narrow the Literals here
-            self.__invoker.services.events.dispatch(SessionCanceledEvent.build(queue_item))
+            self.__invoker.services.events.emit_session_canceled(queue_item)
         return queue_item
 
     def cancel_by_batch_ids(self, queue_id: str, batch_ids: list[str]) -> CancelByBatchIDsResult:
@@ -457,11 +452,11 @@ class SqliteSessionQueue(SessionQueueBase):
             )
             self.__conn.commit()
             if current_queue_item is not None and current_queue_item.batch_id in batch_ids:
-                self.__invoker.services.events.dispatch(SessionCanceledEvent.build(current_queue_item))
+                self.__invoker.services.events.emit_session_canceled(current_queue_item)
                 batch_status = self.get_batch_status(queue_id=queue_id, batch_id=current_queue_item.batch_id)
                 queue_status = self.get_queue_status(queue_id=queue_id)
-                self.__invoker.services.events.dispatch(
-                    QueueItemStatusChangedEvent.build(current_queue_item, batch_status, queue_status)
+                self.__invoker.services.events.emit_queue_item_status_changed(
+                    current_queue_item, batch_status, queue_status
                 )
         except Exception:
             self.__conn.rollback()
@@ -501,11 +496,11 @@ class SqliteSessionQueue(SessionQueueBase):
             )
             self.__conn.commit()
             if current_queue_item is not None and current_queue_item.queue_id == queue_id:
-                self.__invoker.services.events.dispatch(SessionCanceledEvent.build(current_queue_item))
+                self.__invoker.services.events.emit_session_canceled(current_queue_item)
                 batch_status = self.get_batch_status(queue_id=queue_id, batch_id=current_queue_item.batch_id)
                 queue_status = self.get_queue_status(queue_id=queue_id)
-                self.__invoker.services.events.dispatch(
-                    QueueItemStatusChangedEvent.build(current_queue_item, batch_status, queue_status)
+                self.__invoker.services.events.emit_queue_item_status_changed(
+                    current_queue_item, batch_status, queue_status
                 )
         except Exception:
             self.__conn.rollback()

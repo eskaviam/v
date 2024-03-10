@@ -68,7 +68,7 @@ class FastAPIEventFunc(Protocol):
         ...
 
 
-def register_events(events: list[type[TEvent]], func: FastAPIEventFunc) -> None:
+def register_events(events: set[type[TEvent]], func: FastAPIEventFunc) -> None:
     """Register a function to handle a list of events.
 
     :param events: A list of event classes to handle

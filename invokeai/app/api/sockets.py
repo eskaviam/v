@@ -61,7 +61,7 @@ class SocketIO:
         self._sio.on(self._unsub_bulk_download, handler=self._handle_unsub_bulk_download)
 
         register_events(
-            [
+            {
                 InvocationStartedEvent,
                 InvocationDenoiseProgressEvent,
                 InvocationCompleteEvent,
@@ -72,12 +72,12 @@ class SocketIO:
                 QueueItemStatusChangedEvent,
                 BatchEnqueuedEvent,
                 QueueClearedEvent,
-            ],
+            },
             self._handle_queue_event,
         )
 
         register_events(
-            [
+            {
                 ModelLoadStartedEvent,
                 ModelLoadCompleteEvent,
                 ModelInstallDownloadProgressEvent,
@@ -85,12 +85,12 @@ class SocketIO:
                 ModelInstallCompleteEvent,
                 ModelInstallCancelledEvent,
                 ModelInstallErrorEvent,
-            ],
+            },
             self._handle_model_event,
         )
 
         register_events(
-            [BulkDownloadStartedEvent, BulkDownloadCompleteEvent, BulkDownloadErrorEvent],
+            {BulkDownloadStartedEvent, BulkDownloadCompleteEvent, BulkDownloadErrorEvent},
             self._handle_bulk_image_download_event,
         )
 

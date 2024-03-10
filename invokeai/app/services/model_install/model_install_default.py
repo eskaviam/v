@@ -18,13 +18,6 @@ from requests import Session
 
 from invokeai.app.services.config import InvokeAIAppConfig
 from invokeai.app.services.download import DownloadJob, DownloadQueueServiceBase, TqdmProgress
-from invokeai.app.services.events.events_common import (
-    ModelInstallCancelledEvent,
-    ModelInstallCompleteEvent,
-    ModelInstallDownloadProgressEvent,
-    ModelInstallErrorEvent,
-    ModelInstallStartedEvent,
-)
 from invokeai.app.services.invoker import Invoker
 from invokeai.app.services.model_install.model_install_base import ModelInstallServiceBase
 from invokeai.app.services.model_records import DuplicateModelException, ModelRecordServiceBase
@@ -853,11 +846,11 @@ class ModelInstallService(ModelInstallServiceBase):
         job.status = InstallStatus.RUNNING
         self._logger.info(f"{job.source}: model installation started")
         if self._event_bus:
-            self._event_bus.dispatch(ModelInstallStartedEvent.build(job))
+            self._event_bus.emit_model_install_started(job)
 
     def _signal_job_downloading(self, job: ModelInstallJob) -> None:
         if self._event_bus:
-            self._event_bus.dispatch(ModelInstallDownloadProgressEvent.build(job))
+            self._event_bus.emit_model_install_download_progress(job)
 
     def _signal_job_completed(self, job: ModelInstallJob) -> None:
         job.status = InstallStatus.COMPLETED
@@ -866,21 +859,19 @@ class ModelInstallService(ModelInstallServiceBase):
             f"{job.source}: model installation completed. {job.local_path} registered key {job.config_out.key}"
         )
         if self._event_bus:
-            self._event_bus.dispatch(ModelInstallCompleteEvent.build(job))
+            self._event_bus.emit_model_install_complete(job)
 
     def _signal_job_errored(self, job: ModelInstallJob) -> None:
         self._logger.info(f"{job.source}: model installation encountered an exception: {job.error_type}\n{job.error}")
         if self._event_bus:
-            error_type = job.error_type
-            error = job.error
-            assert error_type is not None
-            assert error is not None
-            self._event_bus.dispatch(ModelInstallErrorEvent.build(job))
+            assert job.error_type is not None
+            assert job.error is not None
+            self._event_bus.emit_model_install_error(job)
 
     def _signal_job_cancelled(self, job: ModelInstallJob) -> None:
         self._logger.info(f"{job.source}: model installation was cancelled")
         if self._event_bus:
-            self._event_bus.dispatch(ModelInstallCancelledEvent.build(job))
+            self._event_bus.emit_model_install_cancelled(job)
 
     @staticmethod
     def get_fetcher_from_url(url: str):

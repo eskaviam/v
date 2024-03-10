@@ -4,7 +4,6 @@
 from typing import Optional, Type
 
 from invokeai.app.services.config import InvokeAIAppConfig
-from invokeai.app.services.events.events_common import ModelLoadCompleteEvent, ModelLoadStartedEvent
 from invokeai.app.services.invoker import Invoker
 from invokeai.backend.model_manager import AnyModel, AnyModelConfig, SubModelType
 from invokeai.backend.model_manager.load import (
@@ -59,7 +58,7 @@ class ModelLoadService(ModelLoadServiceBase):
         :param submodel: For main (pipeline models), the submodel to fetch.
         """
 
-        self._invoker.services.events.dispatch(ModelLoadStartedEvent(config=model_config, submodel_type=submodel_type))
+        self._invoker.services.events.emit_model_load_started(model_config, submodel_type)
 
         implementation, model_config, submodel_type = self._registry.get_implementation(model_config, submodel_type)  # type: ignore
         loaded_model: LoadedModel = implementation(
@@ -69,6 +68,6 @@ class ModelLoadService(ModelLoadServiceBase):
             convert_cache=self._convert_cache,
         ).load_model(model_config, submodel_type)
 
-        self._invoker.services.events.dispatch(ModelLoadCompleteEvent(config=model_config, submodel_type=submodel_type))
+        self._invoker.services.events.emit_model_load_started(model_config, submodel_type)
 
         return loaded_model

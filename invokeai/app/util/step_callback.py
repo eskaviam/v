@@ -39,9 +39,6 @@ def stable_diffusion_step_callback(
     if is_canceled():
         raise CanceledException
 
-    # TODO(psyche): Had to put this import here to avoid circular dependencies... fix me!
-    from invokeai.app.services.events.events_common import InvocationDenoiseProgressEvent
-
     # Some schedulers report not only the noisy latents at the current timestep,
     # but also their estimate so far of what the de-noised latents will be. Use
     # that estimate if it is available.
@@ -116,12 +113,10 @@ def stable_diffusion_step_callback(
 
     dataURL = image_to_dataURL(image, image_format="JPEG")
 
-    events.dispatch(
-        InvocationDenoiseProgressEvent.build(
-            queue_item=context_data.queue_item,
-            invocation=context_data.invocation,
-            step=intermediate_state.step,
-            total_steps=intermediate_state.total_steps * intermediate_state.order,
-            progress_image=ProgressImage(dataURL=dataURL, width=width, height=height),
-        )
+    events.emit_invocation_denoise_progress(
+        context_data.queue_item,
+        context_data.invocation,
+        intermediate_state.step,
+        intermediate_state.total_steps * intermediate_state.order,
+        ProgressImage(dataURL=dataURL, width=width, height=height),
     )
