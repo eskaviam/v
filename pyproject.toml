@@ -3,14 +3,14 @@ requires = ["setuptools~=65.5", "pip~=22.3", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "InvokeAI"
+name = "eskav"
 description = "An implementation of Stable Diffusion which provides various new features and options to aid the image generation process"
 requires-python = ">=3.10, <3.12"
 readme = { content-type = "text/markdown", file = "README.md" }
 keywords = ["stable-diffusion", "AI"]
 dynamic = ["version"]
 license = { file = "LICENSE" }
-authors = [{ name = "The InvokeAI Project", email = "lincoln.stein@gmail.com" }]
+authors = [{ name = "The eskav Project", email = "lincoln.stein@gmail.com" }]
 classifiers = [
   'Development Status :: 4 - Beta',
   'Environment :: GPU',
@@ -127,63 +127,63 @@ dependencies = [
 [project.scripts]
 
 # legacy entrypoints; provided for backwards compatibility
-"configure_invokeai.py" = "invokeai.frontend.install.invokeai_configure:invokeai_configure"
-"textual_inversion.py" = "invokeai.frontend.training:invokeai_textual_inversion"
+"configure_eskav.py" = "eskav.frontend.install.eskav_configure:eskav_configure"
+"textual_inversion.py" = "eskav.frontend.training:eskav_textual_inversion"
 
 # shortcut commands to start web ui
-# "invokeai --web" will launch the web interface
-# "invokeai" = "invokeai.frontend.legacy_launch_invokeai:main"
+# "eskav --web" will launch the web interface
+# "eskav" = "eskav.frontend.legacy_launch_eskav:main"
 
 # new shortcut to launch web interface
-"invokeai-web" = "invokeai.app.api_app:invoke_api"
+"eskav-web" = "eskav.app.api_app:invoke_api"
 
 # full commands
-"invokeai-configure" = "invokeai.frontend.install.invokeai_configure:invokeai_configure"
-"invokeai-merge" = "invokeai.frontend.merge.merge_diffusers:main"
-"invokeai-ti" = "invokeai.frontend.training:invokeai_textual_inversion"
-"invokeai-model-install" = "invokeai.frontend.install.model_install:main"
-"invokeai-model-install2" = "invokeai.frontend.install.model_install2:main"              # will eventually be renamed to invokeai-model-install
-"invokeai-migrate3" = "invokeai.backend.install.migrate_to_3:main"
-"invokeai-update" = "invokeai.frontend.install.invokeai_update:main"
-"invokeai-metadata" = "invokeai.backend.image_util.invoke_metadata:main"
-"invokeai-node-web" = "invokeai.app.api_app:invoke_api"
-"invokeai-import-images" = "invokeai.frontend.install.import_images:main"
-"invokeai-db-maintenance" = "invokeai.backend.util.db_maintenance:main"
+"eskav-configure" = "eskav.frontend.install.eskav_configure:eskav_configure"
+"eskav-merge" = "eskav.frontend.merge.merge_diffusers:main"
+"eskav-ti" = "eskav.frontend.training:eskav_textual_inversion"
+"eskav-model-install" = "eskav.frontend.install.model_install:main"
+"eskav-model-install2" = "eskav.frontend.install.model_install2:main"              # will eventually be renamed to eskav-model-install
+"eskav-migrate3" = "eskav.backend.install.migrate_to_3:main"
+"eskav-update" = "eskav.frontend.install.eskav_update:main"
+"eskav-metadata" = "eskav.backend.image_util.invoke_metadata:main"
+"eskav-node-web" = "eskav.app.api_app:invoke_api"
+"eskav-import-images" = "eskav.frontend.install.import_images:main"
+"eskav-db-maintenance" = "eskav.backend.util.db_maintenance:main"
 
 [project.urls]
-"Homepage" = "https://invoke-ai.github.io/InvokeAI/"
-"Documentation" = "https://invoke-ai.github.io/InvokeAI/"
-"Source" = "https://github.com/invoke-ai/InvokeAI/"
-"Bug Reports" = "https://github.com/invoke-ai/InvokeAI/issues"
+"Homepage" = "https://invoke-ai.github.io/eskav/"
+"Documentation" = "https://invoke-ai.github.io/eskav/"
+"Source" = "https://github.com/invoke-ai/eskav/"
+"Bug Reports" = "https://github.com/invoke-ai/eskav/issues"
 "Discord" = "https://discord.gg/ZmtBAhwWhy"
 
 [tool.setuptools.dynamic]
-version = { attr = "invokeai.version.__version__" }
+version = { attr = "eskav.version.__version__" }
 
 [tool.setuptools.packages.find]
 "where" = ["."]
 "include" = [
-  "invokeai.assets.fonts*",
-  "invokeai.version*",
-  "invokeai.generator*",
-  "invokeai.backend*",
-  "invokeai.frontend*",
-  "invokeai.frontend.web.dist*",
-  "invokeai.frontend.web.static*",
-  "invokeai.configs*",
-  "invokeai.app*",
-  "invokeai.invocation_api*",
+  "eskav.assets.fonts*",
+  "eskav.version*",
+  "eskav.generator*",
+  "eskav.backend*",
+  "eskav.frontend*",
+  "eskav.frontend.web.dist*",
+  "eskav.frontend.web.static*",
+  "eskav.configs*",
+  "eskav.app*",
+  "eskav.invocation_api*",
 ]
 
 [tool.setuptools.package-data]
-"invokeai.app.assets" = ["**/*.png"]
-"invokeai.app.services.workflow_records.default_workflows" = ["*.json"]
-"invokeai.assets.fonts" = ["**/*.ttf"]
-"invokeai.backend" = ["**.png"]
-"invokeai.configs" = ["*.example", "**/*.yaml", "*.txt"]
-"invokeai.frontend.web.dist" = ["**"]
-"invokeai.frontend.web.static" = ["**"]
-"invokeai.app.invocations" = ["**"]
+"eskav.app.assets" = ["**/*.png"]
+"eskav.app.services.workflow_records.default_workflows" = ["*.json"]
+"eskav.assets.fonts" = ["**/*.ttf"]
+"eskav.backend" = ["**.png"]
+"eskav.configs" = ["*.example", "**/*.yaml", "*.txt"]
+"eskav.frontend.web.dist" = ["**"]
+"eskav.frontend.web.static" = ["**"]
+"eskav.app.invocations" = ["**"]
 
 #=== Begin: PyTest and Coverage
 [tool.pytest.ini_options]
@@ -194,7 +194,7 @@ markers = [
 ]
 [tool.coverage.run]
 branch = true
-source = ["invokeai"]
+source = ["eskav"]
 omit = ["*tests*", "*migrations*", ".venv/*", "*.env"]
 [tool.coverage.report]
 show_missing = true
@@ -216,7 +216,7 @@ exclude = [
   "__pycache__",
   "build",
   "dist",
-  "invokeai/frontend/web/node_modules/",
+  "eskav/frontend/web/node_modules/",
   ".venv*",
 ]
 
@@ -243,46 +243,46 @@ exclude = ["tests/*"]
 [[tool.mypy.overrides]]
 follow_imports = "skip" # skips type checking of the modules listed below
 module = [
-  "invokeai.app.api.routers.models",
-  "invokeai.app.invocations.compel",
-  "invokeai.app.invocations.latent",
-  "invokeai.app.services.invocation_stats.invocation_stats_default",
-  "invokeai.app.services.model_manager.model_manager_base",
-  "invokeai.app.services.model_manager.model_manager_default",
-  "invokeai.app.services.model_manager.store.model_records_sql",
-  "invokeai.app.util.controlnet_utils",
-  "invokeai.backend.image_util.txt2mask",
-  "invokeai.backend.image_util.safety_checker",
-  "invokeai.backend.image_util.patchmatch",
-  "invokeai.backend.image_util.invisible_watermark",
-  "invokeai.backend.install.model_install_backend",
-  "invokeai.backend.ip_adapter.ip_adapter",
-  "invokeai.backend.ip_adapter.resampler",
-  "invokeai.backend.ip_adapter.unet_patcher",
-  "invokeai.backend.model_management.convert_ckpt_to_diffusers",
-  "invokeai.backend.model_management.lora",
-  "invokeai.backend.model_management.model_cache",
-  "invokeai.backend.model_management.model_manager",
-  "invokeai.backend.model_management.model_merge",
-  "invokeai.backend.model_management.model_probe",
-  "invokeai.backend.model_management.model_search",
-  "invokeai.backend.model_management.models.*",                            # this is needed to ignore the module's `__init__.py`
-  "invokeai.backend.model_management.models.base",
-  "invokeai.backend.model_management.models.controlnet",
-  "invokeai.backend.model_management.models.ip_adapter",
-  "invokeai.backend.model_management.models.lora",
-  "invokeai.backend.model_management.models.sdxl",
-  "invokeai.backend.model_management.models.stable_diffusion",
-  "invokeai.backend.model_management.models.vae",
-  "invokeai.backend.model_management.seamless",
-  "invokeai.backend.model_management.util",
-  "invokeai.backend.stable_diffusion.diffusers_pipeline",
-  "invokeai.backend.stable_diffusion.diffusion.cross_attention_control",
-  "invokeai.backend.stable_diffusion.diffusion.shared_invokeai_diffusion",
-  "invokeai.backend.util.hotfixes",
-  "invokeai.backend.util.mps_fixes",
-  "invokeai.backend.util.util",
-  "invokeai.frontend.install.model_install",
+  "eskav.app.api.routers.models",
+  "eskav.app.invocations.compel",
+  "eskav.app.invocations.latent",
+  "eskav.app.services.invocation_stats.invocation_stats_default",
+  "eskav.app.services.model_manager.model_manager_base",
+  "eskav.app.services.model_manager.model_manager_default",
+  "eskav.app.services.model_manager.store.model_records_sql",
+  "eskav.app.util.controlnet_utils",
+  "eskav.backend.image_util.txt2mask",
+  "eskav.backend.image_util.safety_checker",
+  "eskav.backend.image_util.patchmatch",
+  "eskav.backend.image_util.invisible_watermark",
+  "eskav.backend.install.model_install_backend",
+  "eskav.backend.ip_adapter.ip_adapter",
+  "eskav.backend.ip_adapter.resampler",
+  "eskav.backend.ip_adapter.unet_patcher",
+  "eskav.backend.model_management.convert_ckpt_to_diffusers",
+  "eskav.backend.model_management.lora",
+  "eskav.backend.model_management.model_cache",
+  "eskav.backend.model_management.model_manager",
+  "eskav.backend.model_management.model_merge",
+  "eskav.backend.model_management.model_probe",
+  "eskav.backend.model_management.model_search",
+  "eskav.backend.model_management.models.*",                            # this is needed to ignore the module's `__init__.py`
+  "eskav.backend.model_management.models.base",
+  "eskav.backend.model_management.models.controlnet",
+  "eskav.backend.model_management.models.ip_adapter",
+  "eskav.backend.model_management.models.lora",
+  "eskav.backend.model_management.models.sdxl",
+  "eskav.backend.model_management.models.stable_diffusion",
+  "eskav.backend.model_management.models.vae",
+  "eskav.backend.model_management.seamless",
+  "eskav.backend.model_management.util",
+  "eskav.backend.stable_diffusion.diffusers_pipeline",
+  "eskav.backend.stable_diffusion.diffusion.cross_attention_control",
+  "eskav.backend.stable_diffusion.diffusion.shared_eskav_diffusion",
+  "eskav.backend.util.hotfixes",
+  "eskav.backend.util.mps_fixes",
+  "eskav.backend.util.util",
+  "eskav.frontend.install.model_install",
 ]
 #=== End: MyPy
 
