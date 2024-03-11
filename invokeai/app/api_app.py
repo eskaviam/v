@@ -280,11 +280,11 @@ def invoke_api() -> None:
     server = uvicorn.Server(config)
 
     # replace uvicorn's loggers with InvokeAI's for consistent appearance
-    for logname in ["uvicorn.access", "uvicorn"]:
-        log = InvokeAILogger.get_logger(logname)
-        log.handlers.clear()
-        for ch in logger.handlers:
-            log.addHandler(ch)
+    #for logname in ["uvicorn.access", "uvicorn"]:
+    #    log = InvokeAILogger.get_logger(logname)
+    #    log.handlers.clear()
+    #    for ch in logger.handlers:
+    #        log.addHandler(ch)
 
     loop.run_until_complete(server.serve())
 
