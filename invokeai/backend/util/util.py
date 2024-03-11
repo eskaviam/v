@@ -334,6 +334,7 @@ def download_with_resume(url: str, dest: Path, access_token: str = None) -> Path
         logger.error(f"An error occurred during downloading {dest}: {resp.reason}")
     else:
         #logger.info(f"{dest}: Downloading...")
+        pass
 
     try:
         if content_length < 2000:

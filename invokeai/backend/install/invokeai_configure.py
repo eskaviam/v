@@ -960,6 +960,7 @@ def main() -> None:
 
         if opt.skip_support_models:
             #logger.info("Skipping support models at user's request")
+            pass
         else:
             #logger.info("Installing support models")
             download_support_models()
