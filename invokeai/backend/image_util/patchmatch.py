@@ -32,12 +32,15 @@ class PatchMatch:
             from patchmatch import patch_match as pm
 
             if pm.patchmatch_available:
-                logger.info("Patchmatch initialized")
+                #logger.info("Patchmatch initialized")
+                pass
             else:
-                logger.info("Patchmatch not loaded (nonfatal)")
+                pass
+                #logger.info("Patchmatch not loaded (nonfatal)")
             self.patch_match = pm
         else:
-            logger.info("Patchmatch loading disabled")
+            pass
+            #logger.info("Patchmatch loading disabled")
         self.tried_load = True
 
     @classmethod

@@ -32,10 +32,10 @@ class SqliteDatabase:
         self.verbose = verbose
 
         if not self.db_path:
-            logger.info("Initializing in-memory database")
+            #logger.info("Initializing in-memory database")
         else:
             self.db_path.parent.mkdir(parents=True, exist_ok=True)
-            self.logger.info(f"Initializing database at {self.db_path}")
+            #self.logger.info(f"Initializing database at {self.db_path}")
 
         self.conn = sqlite3.connect(database=self.db_path or sqlite_memory, check_same_thread=False)
         self.lock = threading.RLock()
@@ -61,7 +61,8 @@ class SqliteDatabase:
                 final_db_size = Path(self.db_path).stat().st_size
                 freed_space_in_mb = round((initial_db_size - final_db_size) / 1024 / 1024, 2)
                 if freed_space_in_mb > 0:
-                    self.logger.info(f"Cleaned database (freed {freed_space_in_mb}MB)")
+                    pass
+                    #self.logger.info(f"Cleaned database (freed {freed_space_in_mb}MB)")
             except Exception as e:
                 self.logger.error(f"Error cleaning database: {e}")
                 raise

@@ -131,7 +131,8 @@ class LoggerInterface(InvocationContextInterface):
         Args:
             message: The message to log.
         """
-        self._services.logger.info(message)
+        #self._services.logger.info(message)
+        pass
 
     def warning(self, message: str) -> None:
         """Logs a warning message.

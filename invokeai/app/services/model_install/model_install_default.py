@@ -284,10 +284,10 @@ class ModelInstallService(ModelInstallServiceBase):
         """Synchronize models on disk to those in the config record store database."""
         self._scan_models_directory()
         if autoimport := self._app_config.autoimport_dir:
-            self._logger.info("Scanning autoimport directory for new models")
+            #self._logger.info("Scanning autoimport directory for new models")
             installed = self.scan_directory(self._app_config.root_path / autoimport)
-            self._logger.info(f"{len(installed)} new models registered")
-        self._logger.info("Model installer (re)initialized")
+            #self._logger.info(f"{len(installed)} new models registered")
+        #self._logger.info("Model installer (re)initialized")
 
     def _migrate_yaml(self) -> None:
         db_models = self.record_store.all_models()
@@ -304,9 +304,9 @@ class ModelInstallService(ModelInstallServiceBase):
                 f"Attempted migration of unsupported `models.yaml` v{yaml_version}. Only v3.0.0 is supported. Exiting."
             )
 
-        self._logger.info(
-            f"Starting one-time migration of {len(yaml.items())} models from `models.yaml` to database. This may take a few minutes."
-        )
+        #self._logger.info(
+        #    f"Starting one-time migration of {len(yaml.items())} models from `models.yaml` to database. This may take a few minutes."
+        #)
 
         if len(db_models) == 0 and len(yaml.items()) != 0:
             for model_key, stanza in yaml.items():
@@ -323,7 +323,7 @@ class ModelInstallService(ModelInstallServiceBase):
 
                 try:
                     id = self.register_path(model_path=model_path, config=config)
-                    self._logger.info(f"Migrated {model_name} with id {id}")
+                    #self._logger.info(f"Migrated {model_name} with id {id}")
                 except Exception as e:
                     self._logger.warning(f"Model at {model_path} could not be migrated: {e}")
 
@@ -460,7 +460,7 @@ class ModelInstallService(ModelInstallServiceBase):
                 self._install_completed_event.set()
                 self._install_queue.task_done()
 
-        self._logger.info("Install thread exiting")
+        #self._logger.info("Install thread exiting")
 
     # --------------------------------------------------------------------------------------------
     # Internal functions that manage the models directory
@@ -469,7 +469,7 @@ class ModelInstallService(ModelInstallServiceBase):
         """Remove leftover tmpdirs from aborted installs."""
         path = self._app_config.models_path
         for tmpdir in path.glob(f"{TMPDIR_PREFIX}*"):
-            self._logger.info(f"Removing dangling temporary directory {tmpdir}")
+            #self._logger.info(f"Removing dangling temporary directory {tmpdir}")
             rmtree(tmpdir)
 
     def _scan_models_directory(self) -> None:
@@ -483,21 +483,21 @@ class ModelInstallService(ModelInstallServiceBase):
         installed = set()
 
         with Chdir(self._app_config.models_path):
-            self._logger.info("Checking for models that have been moved or deleted from disk")
+            #self._logger.info("Checking for models that have been moved or deleted from disk")
             for model_config in self.record_store.all_models():
                 path = Path(model_config.path)
                 if not path.exists():
-                    self._logger.info(f"{model_config.name}: path {path.as_posix()} no longer exists. Unregistering")
+                    #self._logger.info(f"{model_config.name}: path {path.as_posix()} no longer exists. Unregistering")
                     defunct_models.add(model_config.key)
             for key in defunct_models:
-                self.unregister(key)
+                #self.unregister(key)
 
-            self._logger.info(f"Scanning {self._app_config.models_path} for new and orphaned models")
+            #self._logger.info(f"Scanning {self._app_config.models_path} for new and orphaned models")
             for cur_base_model in BaseModelType:
                 for cur_model_type in ModelType:
                     models_dir = self._app_config.models_path / Path(cur_base_model.value, cur_model_type.value)
                     installed.update(self.scan_directory(models_dir))
-            self._logger.info(f"{len(installed)} new models registered; {len(defunct_models)} unregistered")
+            #self._logger.info(f"{len(installed)} new models registered; {len(defunct_models)} unregistered")
 
     def _sync_model_path(self, key: str) -> AnyModelConfig:
         """
@@ -525,7 +525,7 @@ class ModelInstallService(ModelInstallServiceBase):
         if old_path == new_path:
             return model
 
-        self._logger.info(f"Moving {model.name} to {new_path}.")
+        #self._logger.info(f"Moving {model.name} to {new_path}.")
         new_path = self._move_model(old_path, new_path)
         model.path = new_path.as_posix()
         self.record_store.update_model(key, ModelRecordChanges(path=model.path))
@@ -537,7 +537,7 @@ class ModelInstallService(ModelInstallServiceBase):
         try:
             id = self.register_path(model)
             self._sync_model_path(id)  # possibly move it to right place in `models`
-            self._logger.info(f"Registered {model.name} with id {id}")
+            #self._logger.info(f"Registered {model.name} with id {id}")
             self._models_installed.add(id)
         except DuplicateModelException:
             pass
@@ -548,7 +548,7 @@ class ModelInstallService(ModelInstallServiceBase):
             return True
         try:
             id = self.install_path(model)
-            self._logger.info(f"Installed {model} with id {id}")
+            #self._logger.info(f"Installed {model} with id {id}")
             self._models_installed.add(id)
         except DuplicateModelException:
             pass
@@ -636,7 +636,8 @@ class ModelInstallService(ModelInstallServiceBase):
         # Add user's cached access token to HuggingFace requests
         source.access_token = source.access_token or HfFolder.get_token()
         if not source.access_token:
-            self._logger.info("No HuggingFace access token present; some models may not be downloadable.")
+            #self._logger.info("No HuggingFace access token present; some models may not be downloadable.")
+            pass
 
         metadata = HuggingFaceMetadataFetch(self._session).from_id(source.repo_id, source.variant)
         assert isinstance(metadata, ModelMetadataWithFiles)
@@ -718,12 +719,12 @@ class ModelInstallService(ModelInstallServiceBase):
         install_job._install_tmpdir = tmpdir
         assert install_job.total_bytes is not None  # to avoid type checking complaints in the loop below
 
-        self._logger.info(f"Queuing {source} for downloading")
-        self._logger.debug(f"remote_files={remote_files}")
+        #self._logger.info(f"Queuing {source} for downloading")
+        #self._logger.debug(f"remote_files={remote_files}")
         for model_file in remote_files:
             url = model_file.url
             path = root / model_file.path.relative_to(subfolder)
-            self._logger.info(f"Downloading {url} => {path}")
+            #self._logger.info(f"Downloading {url} => {path}")
             install_job.total_bytes += model_file.size
             assert hasattr(source, "access_token")
             dest = tmpdir / path.parent
@@ -759,7 +760,7 @@ class ModelInstallService(ModelInstallServiceBase):
     # Callbacks are executed by the download queue in a separate thread
     # ------------------------------------------------------------------
     def _download_started_callback(self, download_job: DownloadJob) -> None:
-        self._logger.info(f"{download_job.source}: model download started")
+        #self._logger.info(f"{download_job.source}: model download started")
         with self._lock:
             install_job = self._download_cache[download_job.source]
             install_job.status = InstallStatus.DOWNLOADING
@@ -785,7 +786,7 @@ class ModelInstallService(ModelInstallServiceBase):
                 self._signal_job_downloading(install_job)
 
     def _download_complete_callback(self, download_job: DownloadJob) -> None:
-        self._logger.info(f"{download_job.source}: model download complete")
+        #self._logger.info(f"{download_job.source}: model download complete")
         with self._lock:
             install_job = self._download_cache[download_job.source]
             self._download_cache.pop(download_job.source, None)
@@ -842,7 +843,7 @@ class ModelInstallService(ModelInstallServiceBase):
     # ------------------------------------------------------------------------------------------------
     def _signal_job_running(self, job: ModelInstallJob) -> None:
         job.status = InstallStatus.RUNNING
-        self._logger.info(f"{job.source}: model installation started")
+        #self._logger.info(f"{job.source}: model installation started")
         if self._event_bus:
             self._event_bus.emit_model_install_running(str(job.source))
 
@@ -871,9 +872,9 @@ class ModelInstallService(ModelInstallServiceBase):
     def _signal_job_completed(self, job: ModelInstallJob) -> None:
         job.status = InstallStatus.COMPLETED
         assert job.config_out
-        self._logger.info(
-            f"{job.source}: model installation completed. {job.local_path} registered key {job.config_out.key}"
-        )
+        #self._logger.info(
+        #    f"{job.source}: model installation completed. {job.local_path} registered key {job.config_out.key}"
+        #)
         if self._event_bus:
             assert job.local_path is not None
             assert job.config_out is not None
@@ -881,7 +882,7 @@ class ModelInstallService(ModelInstallServiceBase):
             self._event_bus.emit_model_install_completed(str(job.source), key, id=job.id)
 
     def _signal_job_errored(self, job: ModelInstallJob) -> None:
-        self._logger.info(f"{job.source}: model installation encountered an exception: {job.error_type}\n{job.error}")
+        #self._logger.info(f"{job.source}: model installation encountered an exception: {job.error_type}\n{job.error}")
         if self._event_bus:
             error_type = job.error_type
             error = job.error
@@ -890,7 +891,7 @@ class ModelInstallService(ModelInstallServiceBase):
             self._event_bus.emit_model_install_error(str(job.source), error_type, error, id=job.id)
 
     def _signal_job_cancelled(self, job: ModelInstallJob) -> None:
-        self._logger.info(f"{job.source}: model installation was cancelled")
+        #self._logger.info(f"{job.source}: model installation was cancelled")
         if self._event_bus:
             self._event_bus.emit_model_install_cancelled(str(job.source))
 

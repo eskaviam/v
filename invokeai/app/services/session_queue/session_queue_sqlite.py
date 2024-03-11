@@ -43,7 +43,8 @@ class SqliteSessionQueue(SessionQueueBase):
         prune_result = self.prune(DEFAULT_QUEUE_ID)
         local_handler.register(event_name=EventServiceBase.queue_event, _func=self._on_session_event)
         if prune_result.deleted > 0:
-            self.__invoker.services.logger.info(f"Pruned {prune_result.deleted} finished queue items")
+            pass
+            #self.__invoker.services.logger.info(f"Pruned {prune_result.deleted} finished queue items")
 
     def __init__(self, db: SqliteDatabase) -> None:
         super().__init__()

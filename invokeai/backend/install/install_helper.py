@@ -106,11 +106,11 @@ class TqdmEventService(EventServiceBase):
             self._bars[dest].update(bytes - self._last[dest])
             self._last[dest] = bytes
         elif payload["event"] == "model_install_completed":
-            self._logger.info(f"{source}: installed successfully.")
+            #self._logger.info(f"{source}: installed successfully.")
         elif payload["event"] == "model_install_error":
-            self._logger.warning(f"{source}: installation failed with error {data['error']}")
+            #self._logger.warning(f"{source}: installation failed with error {data['error']}")
         elif payload["event"] == "model_install_cancelled":
-            self._logger.warning(f"{source}: installation cancelled")
+            #self._logger.warning(f"{source}: installation cancelled")
 
 
 class InstallHelper(object):

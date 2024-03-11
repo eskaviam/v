@@ -54,12 +54,12 @@ class SqliteMigrator:
                 self._logger.debug("Database is up to date, no migrations to run")
                 return False
 
-            self._logger.info("Database update needed")
+            #self._logger.info("Database update needed")
             next_migration = self._migration_set.get(from_version=self._get_current_version(cursor))
             while next_migration is not None:
                 self._run_migration(next_migration)
                 next_migration = self._migration_set.get(self._get_current_version(cursor))
-            self._logger.info("Database updated successfully")
+            #self._logger.info("Database updated successfully")
             return True
 
     def _run_migration(self, migration: Migration) -> None:

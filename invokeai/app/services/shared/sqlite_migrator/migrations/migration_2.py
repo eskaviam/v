@@ -112,7 +112,7 @@ class Migration2Callback:
         if not total_image_names:
             return
 
-        self._logger.info(f"Migrating workflows for {total_image_names} images")
+        #self._logger.info(f"Migrating workflows for {total_image_names} images")
 
         # Migrate the images
         to_migrate: list[tuple[bool, str]] = []
@@ -135,7 +135,7 @@ class Migration2Callback:
                     continue
                 to_migrate.append((True, image_name))
 
-        self._logger.info(f"Adding {len(to_migrate)} embedded workflows to database")
+        #self._logger.info(f"Adding {len(to_migrate)} embedded workflows to database")
         cursor.executemany("UPDATE images SET has_workflow = ? WHERE image_name = ?", to_migrate)
 
 

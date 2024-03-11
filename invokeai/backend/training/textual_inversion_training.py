@@ -70,7 +70,7 @@ logger = get_logger(__name__)
 
 
 def save_progress(text_encoder, placeholder_token_id, accelerator, placeholder_token, save_path):
-    logger.info("Saving embeddings")
+    #logger.info("Saving embeddings")
     learned_embeds = accelerator.unwrap_model(text_encoder).get_input_embeddings().weight[placeholder_token_id]
     learned_embeds_dict = {placeholder_token: learned_embeds.detach().cpu()}
     torch.save(learned_embeds_dict, save_path)
@@ -568,7 +568,7 @@ def do_textual_inversion_training(
         datefmt="%m/%d/%Y %H:%M:%S",
         level=logging.INFO,
     )
-    logger.info(accelerator.state, main_process_only=False)
+    #logger.info(accelerator.state, main_process_only=False)
     if accelerator.is_local_main_process:
         datasets.utils.logging.set_verbosity_warning()
         transformers.utils.logging.set_verbosity_warning()
@@ -759,13 +759,13 @@ def do_textual_inversion_training(
     # Train!
     total_batch_size = train_batch_size * accelerator.num_processes * gradient_accumulation_steps
 
-    logger.info("***** Running training *****")
-    logger.info(f"  Num examples = {len(train_dataset)}")
-    logger.info(f"  Num Epochs = {num_train_epochs}")
-    logger.info(f"  Instantaneous batch size per device = {train_batch_size}")
-    logger.info(f"  Total train batch size (w. parallel, distributed & accumulation) = {total_batch_size}")
-    logger.info(f"  Gradient Accumulation steps = {gradient_accumulation_steps}")
-    logger.info(f"  Total optimization steps = {max_train_steps}")
+    #logger.info("***** Running training *****")
+    #logger.info(f"  Num examples = {len(train_dataset)}")
+    #logger.info(f"  Num Epochs = {num_train_epochs}")
+    #logger.info(f"  Instantaneous batch size per device = {train_batch_size}")
+    #logger.info(f"  Total train batch size (w. parallel, distributed & accumulation) = {total_batch_size}")
+    #logger.info(f"  Gradient Accumulation steps = {gradient_accumulation_steps}")
+    #logger.info(f"  Total optimization steps = {max_train_steps}")
     global_step = 0
     first_epoch = 0
     resume_step = None
@@ -880,7 +880,7 @@ def do_textual_inversion_training(
                     if accelerator.is_main_process:
                         save_path = os.path.join(output_dir, f"checkpoint-{global_step}")
                         accelerator.save_state(save_path)
-                        logger.info(f"Saved state to {save_path}")
+                        #logger.info(f"Saved state to {save_path}")
 
             logs = {"loss": loss.detach().item(), "lr": scheduler.get_last_lr()[0]}
             progress_bar.set_postfix(**logs)

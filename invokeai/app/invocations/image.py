@@ -517,7 +517,7 @@ class ImageNSFWBlurInvocation(BaseInvocation, WithMetadata, WithBoard):
         logger = context.logger
         logger.debug("Running NSFW checker")
         if SafetyChecker.has_nsfw_concept(image):
-            logger.info("A potentially NSFW image has been detected. Image will be blurred.")
+            #logger.info("A potentially NSFW image has been detected. Image will be blurred.")
             blurry_image = image.filter(filter=ImageFilter.GaussianBlur(radius=32))
             caution = self._get_caution_img()
             blurry_image.paste(caution, (0, 0), caution)

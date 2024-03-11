@@ -366,7 +366,7 @@ def run_gui(args: Namespace) -> None:
     merger = get_model_merger(record_store)
     merger.merge_diffusion_models_and_save(**args)
     merged_model_name = args["merged_model_name"]
-    logger.info(f'Models merged into new model: "{merged_model_name}".')
+    #logger.info(f'Models merged into new model: "{merged_model_name}".')
 
 
 def run_cli(args: Namespace):
@@ -377,7 +377,7 @@ def run_cli(args: Namespace):
 
     if not args.merged_model_name:
         args.merged_model_name = "+".join(args.model_names)
-        logger.info(f'No --merged_model_name provided. Defaulting to "{args.merged_model_name}"')
+        #logger.info(f'No --merged_model_name provided. Defaulting to "{args.merged_model_name}"')
 
     record_store: ModelRecordServiceBase = get_config_store()
     assert (
@@ -404,7 +404,7 @@ def run_cli(args: Namespace):
         interp=args.interp,
         force=args.force,
     )
-    logger.info(f'Models merged into new model: "{args.merged_model_name}".')
+    #logger.info(f'Models merged into new model: "{args.merged_model_name}".')
 
 
 def get_config_store() -> ModelRecordServiceSQL:

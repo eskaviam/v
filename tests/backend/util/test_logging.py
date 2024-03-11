@@ -19,12 +19,12 @@ def test_formatting():
     handler = logging.StreamHandler(stream)
     handler.setFormatter(LOG_FORMATTERS["plain"]())
     logger.addHandler(handler)
-    logger.info("test1")
+    #logger.info("test1")
     output = stream.getvalue()
     assert re.search(r"\[InvokeAI\]::INFO --> test1$", output)
 
     handler.setFormatter(LOG_FORMATTERS["legacy"]())
-    logger.info("test2")
+    #logger.info("test2")
     output = stream.getvalue()
     assert re.search(r">> test2$", output)
 

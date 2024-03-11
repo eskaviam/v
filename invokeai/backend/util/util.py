@@ -182,7 +182,7 @@ def parallel_data_prefetch(
         processes += [p]
 
     # start processes
-    logger.info("Start prefetching...")
+    #logger.info("Start prefetching...")
     import time
 
     start = time.time()
@@ -209,7 +209,7 @@ def parallel_data_prefetch(
     finally:
         for p in processes:
             p.join()
-        logger.info(f"Prefetching complete. [{time.time() - start} sec.]")
+        #logger.info(f"Prefetching complete. [{time.time() - start} sec.]")
 
     if target_data_type == "ndarray":
         if not isinstance(gather_res[0], np.ndarray):
@@ -333,7 +333,7 @@ def download_with_resume(url: str, dest: Path, access_token: str = None) -> Path
     elif resp.status_code != 200:
         logger.error(f"An error occurred during downloading {dest}: {resp.reason}")
     else:
-        logger.info(f"{dest}: Downloading...")
+        #logger.info(f"{dest}: Downloading...")
 
     try:
         if content_length < 2000:

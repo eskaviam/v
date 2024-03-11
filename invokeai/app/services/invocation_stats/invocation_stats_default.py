@@ -93,7 +93,7 @@ class InvocationStatsService(InvocationStatsServiceBase):
 
     def log_stats(self, graph_execution_state_id: str) -> None:
         stats = self.get_stats(graph_execution_state_id)
-        logger.info(str(stats))
+        #logger.info(str(stats))
 
     def dump_stats(self, graph_execution_state_id: str, output_path: Path) -> None:
         stats = self.get_stats(graph_execution_state_id)

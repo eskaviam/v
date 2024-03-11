@@ -269,7 +269,7 @@ async def update_model_record(
     record_store = ApiDependencies.invoker.services.model_manager.store
     try:
         model_response: AnyModelConfig = record_store.update_model(key, changes=changes)
-        logger.info(f"Updated model: {key}")
+        #logger.info(f"Updated model: {key}")
     except UnknownModelException as e:
         raise HTTPException(status_code=404, detail=str(e))
     except ValueError as e:
@@ -340,7 +340,7 @@ async def update_model_image(
     model_images = ApiDependencies.invoker.services.model_images
     try:
         model_images.save(pil_image, key)
-        logger.info(f"Updated image for model: {key}")
+       #logger.info(f"Updated image for model: {key}")
     except ValueError as e:
         logger.error(str(e))
         raise HTTPException(status_code=409, detail=str(e))
@@ -370,7 +370,7 @@ async def delete_model(
     try:
         installer = ApiDependencies.invoker.services.model_manager.install
         installer.delete(key)
-        logger.info(f"Deleted model: {key}")
+        #logger.info(f"Deleted model: {key}")
         return Response(status_code=204)
     except UnknownModelException as e:
         logger.error(str(e))
@@ -393,7 +393,7 @@ async def delete_model_image(
     model_images = ApiDependencies.invoker.services.model_images
     try:
         model_images.delete(key)
-        logger.info(f"Deleted model image: {key}")
+        #logger.info(f"Deleted model image: {key}")
         return
     except UnknownModelException as e:
         logger.error(str(e))
@@ -493,7 +493,7 @@ async def install_model(
             access_token=access_token,
             inplace=bool(inplace),
         )
-        logger.info(f"Started installation of {source}")
+        #logger.info(f"Started installation of {source}")
     except UnknownModelException as e:
         logger.error(str(e))
         raise HTTPException(status_code=424, detail=str(e))

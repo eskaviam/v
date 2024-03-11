@@ -334,7 +334,7 @@ def extract_face(
         y_min -= diff // 2
         y_max += diff - diff // 2
 
-    context.logger.info(f"FaceTools --> Calculated bounding box (8 multiple): {crop_size}")
+    #context.logger.info(f"FaceTools --> Calculated bounding box (8 multiple): {crop_size}")
 
     # Crop the output image to the specified size with the center of the face mesh as the center.
     mask = mask.crop((x_min, y_min, x_max, y_max))
@@ -366,7 +366,7 @@ def get_faces_list(
 
     # Generate the face box mask and get the center of the face.
     if not should_chunk:
-        context.logger.info("FaceTools --> Attempting full image face detection.")
+        #context.logger.info("FaceTools --> Attempting full image face detection.")
         result = generate_face_box_mask(
             context=context,
             minimum_confidence=minimum_confidence,
@@ -378,7 +378,7 @@ def get_faces_list(
             draw_mesh=draw_mesh,
         )
     if should_chunk or len(result) == 0:
-        context.logger.info("FaceTools --> Chunking image (chunk toggled on, or no face found in full image).")
+        #context.logger.info("FaceTools --> Chunking image (chunk toggled on, or no face found in full image).")
         width, height = image.size
         image_chunks = []
         x_offsets = []
@@ -397,7 +397,7 @@ def get_faces_list(
                 x_offsets.append(x)
                 y_offsets.append(0)
                 fx += increment
-                context.logger.info(f"FaceTools --> Chunk starting at x = {x}")
+                #context.logger.info(f"FaceTools --> Chunk starting at x = {x}")
         elif height > width:
             # Portrait - slice the image vertically
             fy = 0.0
@@ -409,10 +409,10 @@ def get_faces_list(
                 x_offsets.append(0)
                 y_offsets.append(y)
                 fy += increment
-                context.logger.info(f"FaceTools --> Chunk starting at y = {y}")
+                #context.logger.info(f"FaceTools --> Chunk starting at y = {y}")
 
         for idx in range(len(image_chunks)):
-            context.logger.info(f"FaceTools --> Evaluating faces in chunk {idx}")
+            #context.logger.info(f"FaceTools --> Evaluating faces in chunk {idx}")
             result = result + generate_face_box_mask(
                 context=context,
                 minimum_confidence=minimum_confidence,

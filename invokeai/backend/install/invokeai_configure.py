@@ -197,16 +197,16 @@ def hf_download_from_pretrained(model_class: Type[ModelMixin], model_name: str, 
 # ---------------------------------------------
 def download_with_progress_bar(model_url: str, model_dest: str, label: str = "the"):
     try:
-        logger.info(f"Installing {label} model file {model_url}...")
+        #logger.info(f"Installing {label} model file {model_url}...")
         if not os.path.exists(model_dest):
             os.makedirs(os.path.dirname(model_dest), exist_ok=True)
             request.urlretrieve(model_url, model_dest, ProgressBar(os.path.basename(model_dest)))
-            logger.info("...downloaded successfully")
+            #logger.info("...downloaded successfully")
         else:
-            logger.info("...exists")
+            #logger.info("...exists")
     except Exception:
-        logger.info("...download failed")
-        logger.info(f"Error downloading {label} model")
+        #logger.info("...download failed")
+        #logger.info(f"Error downloading {label} model")
         print(traceback.format_exc(), file=sys.stderr)
 
 
@@ -214,7 +214,7 @@ def download_conversion_models():
     target_dir = config.models_path / "core/convert"
     kwargs = {}  # for future use
     try:
-        logger.info("Downloading core tokenizers and text encoders")
+        #logger.info("Downloading core tokenizers and text encoders")
 
         # bert
         with warnings.catch_warnings():
@@ -245,12 +245,12 @@ def download_conversion_models():
         pipeline.save_pretrained(target_dir / model_name, safe_serialization=True)
 
         # VAE
-        logger.info("Downloading stable diffusion VAE")
+        #logger.info("Downloading stable diffusion VAE")
         vae = AutoencoderKL.from_pretrained("stabilityai/sd-vae-ft-mse", **kwargs)
         vae.save_pretrained(target_dir / "sd-vae-ft-mse", safe_serialization=True)
 
         # safety checking
-        logger.info("Downloading safety checker")
+        #logger.info("Downloading safety checker")
         repo_id = "CompVis/stable-diffusion-safety-checker"
         pipeline = AutoFeatureExtractor.from_pretrained(repo_id, **kwargs)
         pipeline.save_pretrained(target_dir / "stable-diffusion-safety-checker", safe_serialization=True)
@@ -266,7 +266,7 @@ def download_conversion_models():
 # ---------------------------------------------
 # TO DO: use the download queue here.
 def download_realesrgan():
-    logger.info("Installing ESRGAN Upscaling models...")
+    #logger.info("Installing ESRGAN Upscaling models...")
     URLs = [
         {
             "url": "https://github.com/xinntao/Real-ESRGAN/releases/download/v0.1.0/RealESRGAN_x4plus.pth",
@@ -295,7 +295,7 @@ def download_realesrgan():
 
 # ---------------------------------------------
 def download_lama():
-    logger.info("Installing lama infill model")
+    #logger.info("Installing lama infill model")
     download_with_progress_bar(
         "https://github.com/Sanster/models/releases/download/add_big_lama/big-lama.pt",
         config.models_path / "core/misc/lama/lama.pt",
@@ -732,7 +732,7 @@ def clip(value: float, range: tuple[float, float], step: float) -> float:
 
 # -------------------------------------
 def initialize_rootdir(root: Path, yes_to_all: bool = False):
-    logger.info("Initializing InvokeAI runtime directory")
+    #logger.info("Initializing InvokeAI runtime directory")
     for name in ("models", "databases", "text-inversion-output", "text-inversion-training-data", "configs"):
         os.makedirs(os.path.join(root, name), exist_ok=True)
     for model_type in ModelType:
@@ -851,7 +851,7 @@ def migrate_if_needed(opt: Namespace, root: Path) -> bool:
         if opt.yes_to_all or yes_or_no(
             f"{str(config.root_path)} appears to be a 2.3 format root directory. Convert to version 3.0?"
         ):
-            logger.info("** Migrating invokeai.init to invokeai.yaml")
+            #logger.info("** Migrating invokeai.init to invokeai.yaml")
             migrate_init_file(old_init_file)
             omegaconf = OmegaConf.load(new_init_file)
             assert isinstance(omegaconf, DictConfig)
@@ -954,13 +954,13 @@ def main() -> None:
             if init_options:
                 write_opts(init_options, new_init_file)
             else:
-                logger.info('\n** CANCELLED AT USER\'S REQUEST. USE THE "invoke.sh" LAUNCHER TO RUN LATER **\n')
+                #logger.info('\n** CANCELLED AT USER\'S REQUEST. USE THE "invoke.sh" LAUNCHER TO RUN LATER **\n')
                 sys.exit(0)
 
         if opt.skip_support_models:
-            logger.info("Skipping support models at user's request")
+            #logger.info("Skipping support models at user's request")
         else:
-            logger.info("Installing support models")
+            #logger.info("Installing support models")
             download_support_models()
 
         if opt.skip_sd_weights:

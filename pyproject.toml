@@ -138,7 +138,7 @@ dependencies = [
 "v-w" = "invokeai.app.api_app:invoke_api"
 
 # full commands
-"v-configure" = "invokeai.frontend.install.invokeai_configure:invokeai_configure"
+"v-c" = "invokeai.frontend.install.invokeai_configure:invokeai_configure"
 "v-merge" = "invokeai.frontend.merge.merge_diffusers:main"
 "v-ti" = "invokeai.frontend.training:invokeai_textual_inversion"
 "v-model-install" = "invokeai.frontend.install.model_install:main"

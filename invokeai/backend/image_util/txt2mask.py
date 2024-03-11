@@ -74,7 +74,7 @@ class Txt2Mask(object):
     """
 
     def __init__(self, device="cpu", refined=False):
-        logger.info("Initializing clipseg model for text to mask inference")
+        #logger.info("Initializing clipseg model for text to mask inference")
 
         # BUG: we are not doing anything with the device option at this time
         self.device = device

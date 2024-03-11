@@ -39,7 +39,7 @@ for d in Path(__file__).parent.iterdir():
         logger.warn(f"Could not load {init}")
         continue
 
-    logger.info(f"Loading node pack {module_name}")
+    #logger.info(f"Loading node pack {module_name}")
 
     module = module_from_spec(spec)
     sys.modules[spec.name] = module
@@ -50,4 +50,5 @@ for d in Path(__file__).parent.iterdir():
     del init, module_name
 
 if loaded_count > 0:
-    logger.info(f"Loaded {loaded_count} node packs from {Path(__file__).parent}")
+    #logger.info(f"Loaded {loaded_count} node packs from {Path(__file__).parent}")
+    pass

@@ -356,12 +356,12 @@ def copy_to_embeddings_folder(args: Dict[str, str]) -> None:
     dest_dir_name = args["placeholder_token"].strip("<>")
     destination = config.root_dir / "embeddings" / dest_dir_name
     os.makedirs(destination, exist_ok=True)
-    logger.info(f"Training completed. Copying learned_embeds.bin into {str(destination)}")
+    #logger.info(f"Training completed. Copying learned_embeds.bin into {str(destination)}")
     shutil.copy(source, destination)
     if (input("Delete training logs and intermediate checkpoints? [y] ") or "y").startswith(("y", "Y")):
         shutil.rmtree(Path(args["output_dir"]))
     else:
-        logger.info(f'Keeping {args["output_dir"]}')
+        #logger.info(f'Keeping {args["output_dir"]}')
 
 
 def save_args(args: dict) -> None:

@@ -76,7 +76,7 @@ class StableDiffusionDiffusersModel(GenericDiffusersLoader):
 
         config_file = config.config_path
 
-        self._logger.info(f"Converting {model_path} to diffusers format")
+        #self._logger.info(f"Converting {model_path} to diffusers format")
         convert_ckpt_to_diffusers(
             model_path,
             output_path,

@@ -609,7 +609,7 @@ def main() -> None:
     logger = InvokeAILogger().get_logger(config=config)
 
     if not config.model_conf_path.exists():
-        logger.info("Your InvokeAI root directory is not set up. Calling invokeai-configure.")
+        #logger.info("Your InvokeAI root directory is not set up. Calling invokeai-configure.")
         from invokeai.frontend.install.invokeai_configure import invokeai_configure
 
         invokeai_configure()
@@ -624,7 +624,7 @@ def main() -> None:
         curses.nocbreak()
         curses.echo()
         curses.endwin()
-        logger.info("Goodbye! Come back soon.")
+        #logger.info("Goodbye! Come back soon.")
     except WindowTooSmallException as e:
         logger.error(str(e))
     except widget.NotEnoughSpaceForWidget as e:

@@ -49,7 +49,7 @@ class Profiler:
 
         self._profiler = cProfile.Profile()
         self._profiler.enable()
-        self._logger.info(f"Started profiling {self.profile_id}.")
+        #self._logger.info(f"Started profiling {self.profile_id}.")
 
     def stop(self) -> Path:
         if not self._profiler:
@@ -60,7 +60,7 @@ class Profiler:
         path = Path(self._output_dir, filename)
 
         self._profiler.dump_stats(path)
-        self._logger.info(f"Stopped profiling, profile dumped to {path}.")
+        #self._logger.info(f"Stopped profiling, profile dumped to {path}.")
         self._profiler = None
         self.profile_id = None
 
