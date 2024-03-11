@@ -135,20 +135,20 @@ dependencies = [
 # "invokeai" = "invokeai.frontend.legacy_launch_invokeai:main"
 
 # new shortcut to launch web interface
-"eskav-web" = "invokeai.app.api_app:invoke_api"
+"v-w" = "invokeai.app.api_app:invoke_api"
 
 # full commands
-"eskav-configure" = "invokeai.frontend.install.invokeai_configure:invokeai_configure"
-"eskav-merge" = "invokeai.frontend.merge.merge_diffusers:main"
-"eskav-ti" = "invokeai.frontend.training:invokeai_textual_inversion"
-"eskav-model-install" = "invokeai.frontend.install.model_install:main"
-"eskav-model-install2" = "invokeai.frontend.install.model_install2:main"              # will eventually be renamed to eskav-model-install
-"eskav-migrate3" = "invokeai.backend.install.migrate_to_3:main"
-"eskav-update" = "invokeai.frontend.install.invokeai_update:main"
-"eskav-metadata" = "invokeai.backend.image_util.invoke_metadata:main"
-"eskav-node-web" = "invokeai.app.api_app:invoke_api"
-"eskav-import-images" = "invokeai.frontend.install.import_images:main"
-"eskav-db-maintenance" = "invokeai.backend.util.db_maintenance:main"
+"v-configure" = "invokeai.frontend.install.invokeai_configure:invokeai_configure"
+"v-merge" = "invokeai.frontend.merge.merge_diffusers:main"
+"v-ti" = "invokeai.frontend.training:invokeai_textual_inversion"
+"v-model-install" = "invokeai.frontend.install.model_install:main"
+"v-model-install2" = "invokeai.frontend.install.model_install2:main"              # will eventually be renamed to eskav-model-install
+"v-migrate3" = "invokeai.backend.install.migrate_to_3:main"
+"v-update" = "invokeai.frontend.install.invokeai_update:main"
+"v-metadata" = "invokeai.backend.image_util.invoke_metadata:main"
+"v-node-web" = "invokeai.app.api_app:invoke_api"
+"v-import-images" = "invokeai.frontend.install.import_images:main"
+"v-db-maintenance" = "invokeai.backend.util.db_maintenance:main"
 
 [project.urls]
 "Homepage" = "https://invoke-ai.github.io/InvokeAI/"

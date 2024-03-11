@@ -12,7 +12,7 @@ from .services.config import InvokeAIAppConfig
 app_config = InvokeAIAppConfig.get_config()
 app_config.parse_args()
 if app_config.version:
-    print(f"InvokeAI version {__version__}")
+    print(f"ver {__version__}")
     sys.exit(0)
 
 if True:  # hack to make flake8 happy with imports coming after setting up the config
@@ -87,7 +87,7 @@ async def lifespan(app: FastAPI):
 # Create the app
 # TODO: create this all in a method so configuration/etc. can be passed in?
 app = FastAPI(
-    title="Invoke - Community Edition",
+    title="Google",
     docs_url=None,
     redoc_url=None,
     separate_input_output_schemas=False,
