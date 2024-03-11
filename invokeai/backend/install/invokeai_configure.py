@@ -871,7 +871,7 @@ def main() -> None:
     global FORCE_FULL_PRECISION  # FIXME
     parser = argparse.ArgumentParser(description="InvokeAI model downloader")
     parser.add_argument(
-        "--skip-sd-weights",
+        "--s-d-w",
         dest="skip_sd_weights",
         action=argparse.BooleanOptionalAction,
         default=False,

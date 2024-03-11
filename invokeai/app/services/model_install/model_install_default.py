@@ -490,7 +490,7 @@ class ModelInstallService(ModelInstallServiceBase):
                     #self._logger.info(f"{model_config.name}: path {path.as_posix()} no longer exists. Unregistering")
                     defunct_models.add(model_config.key)
             for key in defunct_models:
-                #self.unregister(key)
+                self.unregister(key)
 
             #self._logger.info(f"Scanning {self._app_config.models_path} for new and orphaned models")
             for cur_base_model in BaseModelType:
