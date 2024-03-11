@@ -204,6 +204,7 @@ def download_with_progress_bar(model_url: str, model_dest: str, label: str = "th
             #logger.info("...downloaded successfully")
         else:
             #logger.info("...exists")
+            pass
     except Exception:
         #logger.info("...download failed")
         #logger.info(f"Error downloading {label} model")

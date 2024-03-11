@@ -33,6 +33,7 @@ class SqliteDatabase:
 
         if not self.db_path:
             #logger.info("Initializing in-memory database")
+            pass
         else:
             self.db_path.parent.mkdir(parents=True, exist_ok=True)
             #self.logger.info(f"Initializing database at {self.db_path}")

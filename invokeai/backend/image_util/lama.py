@@ -20,7 +20,7 @@ def norm_img(np_img):
 
 def load_jit_model(url_or_path, device):
     model_path = url_or_path
-    logger.info(f"Loading model from: {model_path}")
+    #logger.info(f"Loading model from: {model_path}")
     model = torch.jit.load(model_path, map_location="cpu").to(device)
     model.eval()
     return model

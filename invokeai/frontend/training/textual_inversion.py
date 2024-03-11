@@ -362,6 +362,7 @@ def copy_to_embeddings_folder(args: Dict[str, str]) -> None:
         shutil.rmtree(Path(args["output_dir"]))
     else:
         #logger.info(f'Keeping {args["output_dir"]}')
+        pass
 
 
 def save_args(args: dict) -> None:

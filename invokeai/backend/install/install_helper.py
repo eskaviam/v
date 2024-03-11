@@ -107,10 +107,11 @@ class TqdmEventService(EventServiceBase):
             self._last[dest] = bytes
         elif payload["event"] == "model_install_completed":
             #self._logger.info(f"{source}: installed successfully.")
+            pass
         elif payload["event"] == "model_install_error":
-            #self._logger.warning(f"{source}: installation failed with error {data['error']}")
+            self._logger.warning(f"{source}: installation failed with error {data['error']}")
         elif payload["event"] == "model_install_cancelled":
-            #self._logger.warning(f"{source}: installation cancelled")
+            self._logger.warning(f"{source}: installation cancelled")
 
 
 class InstallHelper(object):
@@ -261,7 +262,7 @@ class InstallHelper(object):
                 self._logger.error(f"{model_to_remove}: unknown model")
             else:
                 for m in matches:
-                    self._logger.info(f"Deleting {m.type}:{m.name}")
+                    #self._logger.info(f"Deleting {m.type}:{m.name}")
                     installer.delete(m.key)
 
         installer.wait_for_installs()

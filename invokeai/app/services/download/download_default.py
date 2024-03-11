@@ -82,7 +82,8 @@ class DownloadQueueService(DownloadQueueServiceBase):
             if queued_jobs:
                 self._logger.warning(f"Cancelling {len(queued_jobs)} queued downloads")
             if active_jobs:
-                self._logger.info(f"Waiting for {len(active_jobs)} active download jobs to complete")
+                #self._logger.info(f"Waiting for {len(active_jobs)} active download jobs to complete")
+                pass
             with self._queue.mutex:
                 self._queue.queue.clear()
             self.join()  # wait for all active jobs to finish

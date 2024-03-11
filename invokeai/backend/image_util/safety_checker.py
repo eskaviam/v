@@ -42,6 +42,7 @@ class SafetyChecker:
             except Exception as e:
                 logger.warning(f"Could not load NSFW checker: {str(e)}")
         else:
+            pass
             #logger.info("NSFW checker loading disabled")
         cls.tried_load = True
 
