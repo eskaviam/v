@@ -192,15 +192,18 @@ except ImportError:
 
 # module level functions
 def debug(msg: str, *args: str, **kwargs: Any) -> None:  # noqa D103
-    InvokeAILogger.get_logger().debug(msg, *args, **kwargs)
+    #InvokeAILogger.get_logger().debug(msg, *args, **kwargs)
+    pass
 
 
 def info(msg: str, *args: str, **kwargs: Any) -> None:  # noqa D103
-    InvokeAILogger.get_logger().info(msg, *args, **kwargs)
+    #InvokeAILogger.get_logger().info(msg, *args, **kwargs)
+    pass
 
 
 def warning(msg: str, *args: str, **kwargs: Any) -> None:  # noqa D103
-    InvokeAILogger.get_logger().warning(msg, *args, **kwargs)
+    #InvokeAILogger.get_logger().warning(msg, *args, **kwargs)
+    pass
 
 
 def error(msg: str, *args: str, **kwargs: Any) -> None:  # noqa D103
@@ -212,15 +215,18 @@ def critical(msg: str, *args: str, **kwargs: Any) -> None:  # noqa D103
 
 
 def log(level: int, msg: str, *args: str, **kwargs: Any) -> None:  # noqa D103
-    InvokeAILogger.get_logger().log(level, msg, *args, **kwargs)
+    #InvokeAILogger.get_logger().log(level, msg, *args, **kwargs)
+    pass
 
 
 def disable(level: int = logging.CRITICAL) -> None:  # noqa D103
-    logging.disable(level)
+    #logging.disable(level)
+    pass
 
 
 def basicConfig(**kwargs: Any) -> None:  # noqa D103
-    logging.basicConfig(**kwargs)
+    #logging.basicConfig(**kwargs)
+    pass
 
 
 _FACILITY_MAP = (
@@ -339,7 +345,7 @@ class InvokeAILogger(object):  # noqa D102
 
     @classmethod
     def get_logger(
-        cls, name: str = "InvokeAI", config: InvokeAIAppConfig = InvokeAIAppConfig.get_config()
+        cls, name: str = "log", config: InvokeAIAppConfig = InvokeAIAppConfig.get_config()
     ) -> logging.Logger:  # noqa D102
         if name in cls.loggers:
             return cls.loggers[name]
